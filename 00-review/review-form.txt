@@ -25,9 +25,9 @@ Contribution to HCI
 
 The Review
 
-    This paper proposes the guidelines which can be used to in the future development of smell deterctors.
+    This paper proposes the guidelines which can be used to in the future development of smell detectors.
 
-    However, the experiment about the tool abedience doesn't strongly support the arguement that the guidelines are important for detectors. This paper does conduct a survey about the importance of the guidelines directly, and then a survey about the tool abedience. Both of these get positive result. But the abedience does not come to the conclusion that the guidelines does help the tool. The author should exclude other possible reason by doing more experiments.
+    However, the experiment about the tool abedience doesn't strongly support the argument that the guidelines are important for detectors. This paper does conduct a survey about the importance of the guidelines directly, and then a survey about the tool abedience. Both of these get positive result. But the abedience does not come to the conclusion that the guidelines does help the tool. The author should exclude other possible reason by doing more experiments.
 
 Strengths
 
