@@ -1,53 +1,55 @@
 CHI 2010 Papers and Notes
 -------------------------
 
-Reviews of submission #305: "Restructuring Software with Gestures"
-
--- This is a comment.  Make sure that your review does not contain any lines starting with --, 
--- since all such lines will be stripped by the review system
+Reviews of submission #305: "Informing Developers about Design Problems"
 
 Reviewer:           
 
---  Fill in your name
+    Dejun Qian
 
 Overall Rating
 
--- Uncomment the score that you wish to give, and delete the others.   .5 scores are allowed.
-
---    1 	. . .  Reject: I would argue for rejecting this paper. 
---    1.5
---    2  	. . .  Possibly Reject
---    2.5
---    3  	. . .  Neutral
---    3.5
---    4  	. . .  Possibly Accept
---    4.5
---    5  	. . .  Accept: I would argue for accepting this paper.    
+    4  	. . .  Possibly Accept
 
 Expertise
 
---   1  (Know little about this area)
---   2  (Informed outsider)
---   3  (Knowledgeable)
---   4  (Expert)
+    3  (Knowledgeable)
 
 Summary of the Content
 
--- This summary serves to remind you which paper this is, and will also expose 
--- any misunderstanding between you and the authors.
+    This paper presents a set of user-interface guidelines for the design of code-smell detectors, and uses these guidelines to implement a code-smell detector called Chrysanthemum. The experiment is conducted between 12 programmers to evaluate the effect of these guidelines. The results suggest that the guidelines are important to build smell detectors and help the detectors to assist programmers effectively identifying opportunities for refactoring and making informed judgments about whether and how to refactor.
 
 Contribution to HCI
 
--- Fill in this space with your opinion of this paper's contribution
+    The main contribution of this paper is the guidelines for making smell detectors more usable. This paper also implements a tool to exemplifies these guidelines.
 
 The Review
 
--- Fill in this space.  Your comments here should justify your "Overall Rating" above
+    This paper proposes the guidelines which is important to build smell detectors, implements a tool using these guidelines, and conducts a experiment which leads to a result that these guidelines are helpful. The work of this paper can be used to in the future development of smell deterctors.
+
+However, the paper should be improved in the following ways in order to be published,
+
+1. More experiments should be done to show that detectors using these guidelines do overcome those without meeting these guidelines.
+
+2. In the evaluation section, too many details are provided which take too many space without providing enough useful information. For instance, on page 7 part 2, 
+
+"Before using Chrysanthemum, the administrator gave each subject a demonstration and read aloud the following description:
+The tool is represented by a visualization behind your Java code. It looks a bit like a bunch of petals on a ﬂower. Each petal represents a smell, and you can hover over to see the name of the smell. The size of the petal represents how bad that smell is in the code that you are looking at. As this tripwire passes over methods, or when the cursor is in a method, the smells for that method are visualized. This part of the tool is intended to give you an idea of which smells are present. There’s more detail to the tool, but I’ll get to that later."
+
+This could be described in few sentences.
 
 Strengths
 
--- Fill in this space
+     Without more experiments to show the work in this paper overwhelms the previous work, the strengths for the argument are not very strong.
 
 Areas for Improvement
 
--- Fill in this space.  Try to be constructive
+     1. More experiments should be done to show that detectors using these guidelines do overcome those without meeting these guidelines.
+
+     2. In the evaluation section, too many details are provided which take too many space without providing enough useful information. For instance, on page 7 part 2, 
+
+"Before using Chrysanthemum, the administrator gave each subject a demonstration and read aloud the following description:
+The tool is represented by a visualization behind your Java code. It looks a bit like a bunch of petals on a ﬂower. Each petal represents a smell, and you can hover over to see the name of the smell. The size of the petal represents how bad that smell is in the code that you are looking at. As this tripwire passes over methods, or when the cursor is in a method, the smells for that method are visualized. This part of the tool is intended to give you an idea of which smells are present. There’s more detail to the tool, but I’ll get to that later."
+
+This could be described in few sentences.
+     
