@@ -1,0 +1,53 @@
+CHI 2010 Papers and Notes
+-------------------------
+
+Reviews of submission #305: "Restructuring Software with Gestures"
+
+-- This is a comment.  Make sure that your review does not contain any lines starting with --, 
+-- since all such lines will be stripped by the review system
+
+Reviewer:           
+
+--  Fill in your name
+
+Overall Rating
+
+-- Uncomment the score that you wish to give, and delete the others.   .5 scores are allowed.
+
+--    1 	. . .  Reject: I would argue for rejecting this paper. 
+--    1.5
+--    2  	. . .  Possibly Reject
+--    2.5
+--    3  	. . .  Neutral
+--    3.5
+--    4  	. . .  Possibly Accept
+--    4.5
+--    5  	. . .  Accept: I would argue for accepting this paper.    
+
+Expertise
+
+--   1  (Know little about this area)
+--   2  (Informed outsider)
+--   3  (Knowledgeable)
+--   4  (Expert)
+
+Summary of the Content
+
+-- This summary serves to remind you which paper this is, and will also expose 
+-- any misunderstanding between you and the authors.
+
+Contribution to HCI
+
+-- Fill in this space with your opinion of this paper's contribution
+
+The Review
+
+-- Fill in this space.  Your comments here should justify your "Overall Rating" above
+
+Strengths
+
+-- Fill in this space
+
+Areas for Improvement
+
+-- Fill in this space.  Try to be constructive
