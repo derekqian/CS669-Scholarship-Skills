@@ -25,18 +25,9 @@ Contribution to HCI
 
 The Review
 
-    This paper proposes the guidelines which is important to build smell detectors, implements a tool using these guidelines, and conducts a experiment which leads to a result that these guidelines are helpful. The work of this paper can be used to in the future development of smell deterctors.
+    This paper proposes the guidelines which can be used to in the future development of smell deterctors.
 
-However, the paper should be improved in the following ways in order to be published,
-
-1. More experiments should be done to show that detectors using these guidelines do overcome those without meeting these guidelines.
-
-2. In the evaluation section, too many details are provided which take too many space without providing enough useful information. For instance, on page 7 part 2, 
-
-"Before using Chrysanthemum, the administrator gave each subject a demonstration and read aloud the following description:
-The tool is represented by a visualization behind your Java code. It looks a bit like a bunch of petals on a ﬂower. Each petal represents a smell, and you can hover over to see the name of the smell. The size of the petal represents how bad that smell is in the code that you are looking at. As this tripwire passes over methods, or when the cursor is in a method, the smells for that method are visualized. This part of the tool is intended to give you an idea of which smells are present. There’s more detail to the tool, but I’ll get to that later."
-
-This could be described in few sentences.
+    However, the experiment about the tool abedience doesn't strongly support the arguement that the guidelines are important for detectors. This paper does conduct a survey about the importance of the guidelines directly, and then a survey about the tool abedience. Both of these get positive result. But the abedience does not come to the conclusion that the guidelines does help the tool. The author should exclude other possible reason by doing more experiments.
 
 Strengths
 
@@ -51,5 +42,5 @@ Areas for Improvement
 "Before using Chrysanthemum, the administrator gave each subject a demonstration and read aloud the following description:
 The tool is represented by a visualization behind your Java code. It looks a bit like a bunch of petals on a ﬂower. Each petal represents a smell, and you can hover over to see the name of the smell. The size of the petal represents how bad that smell is in the code that you are looking at. As this tripwire passes over methods, or when the cursor is in a method, the smells for that method are visualized. This part of the tool is intended to give you an idea of which smells are present. There’s more detail to the tool, but I’ll get to that later."
 
-This could be described in few sentences.
+     This could be described in few sentences.
      
