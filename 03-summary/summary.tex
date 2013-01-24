@@ -1,5 +1,5 @@
 \documentclass[11pt,letterpaper,oneside]{article}
-\usepackage[top=1in,left=1in,right=1in,bottom=1in]{geometry}
+\usepackage[top=0.5in,left=1in,right=1in,bottom=1in]{geometry}
 \usepackage{fancyvrb}
 \usepackage{colortbl}
 \usepackage{graphicx}
@@ -17,9 +17,41 @@
 \maketitle
 
 % the problem solved, the approach used, and the results
-This paper 
+Software reuse gives software developers to build larger software products with higher quality in shorter time.
+The reused software is usually provided to the developers in the forms of source code or binary executable,
+along with the document explaining to the users how to use itself.
+Reading and understanding the document is important, 
+or even the only way when no source code is provided,
+to correctly use the provided functionalities.
+However, the developers are easily overlook something in the document,
+and misuse some of the functions,
+which will leads to potential bugs in the product.
+Many verification tools are developed to detect the inconsistence between the document and the software,
+however these tools only accept formal specifictions as their input.
+They can't understand documents writen in natual language.
+This paper \cite{bib:Pandita} presents an approach to fill the gap between what is needed by the existing verification tools and what the document can provide.
 
-\cite{bib:Pandita}.
+The author of the paper claimed that they are the first to address this problem.
+This paper developed a technique to get the code contract from the library document.
+The technique includes five steps: parse, pre-process, text analysis, post-process and code contract generation.
+In the parsing step, the parsor process the API documents and extracts intermediate contents of the method description, 
+such as, summary description, argument description, return description, exception dexcription and remark dexcription. 
+In the pre-processing step, the pre-processor takes the intermediate content, 
+and perform three categories of processing: meta-data augmentation, noun boosting and programming constructs and jargon handling.
+These first two steps are critical, as they can improve the results of the third step a lot.
+The third step is text analysis.
+In this step, this paper developed a text analysis engine framework, 
+and adopting an existing POS tagger to annote POS tags for the input sentences.
+After that, they use an NLP technique, called shallow parsor to classify the sentences into semantic templates,
+based on the lexical tokens generated in the previous step.
+The shallow parsor also generates FOL expressions after it has done the classifiction.
+In the post-processing step, the paper does three types of semantic analysis: removing irrelevant modifiers in predicates, classifying predicates into a semantic class based on domain dictionaries, and augmenting expressions.
+In the final step, by using prefined mapping from predicates to code contracts,
+the paper translates the FOL into code contracts.
+
+The author did three experiments to demonstrate the effection of the approach. 
+Their experimens show that the approach presented gives 92\% precision and 92\% recall towards the contract sentence detection.
+And they achieved 82\% of accuracy of code contract generation.
 
 \bibliographystyle{acm}
 \bibliography{reference}
