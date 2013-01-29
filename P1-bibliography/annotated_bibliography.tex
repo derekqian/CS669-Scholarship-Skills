@@ -1,0 +1,36 @@
+\documentclass{acmtrans2m}
+
+\title{Software Verification Based on Natural Language Documents: An Annotated Bibliography}
+\author{Dejun Qian}
+
+% get rid of footnote on the first page
+\def\firstfoot{}
+
+\newenvironment{annotation}{%
+  ~\vskip 0.05in                    %space before annotation
+  \par\begingroup                   %begin to format the environment
+  \leftskip 0.1in\rightskip 0.1in   %set margin
+  \def\baselinestretch{2}           %double spacing
+  \normalsize                       %font size
+  \hskip 2em                        %indent
+}{%
+  \par\endgroup                     %end of environment
+  ~\vskip 0.05in                    %space after annotation
+}
+
+\begin{document}
+\maketitle
+\pagestyle{plain}
+
+This annotated bibliography discusses the techniques used to verify the consistencies
+between the software and the documents written in natual language. The software could
+use a variety of programming languages, like C/C++, Java, PHP and etc.. The documents
+could be in the form of programming language comments, Java annotation or seperate
+files.
+% Definitions that are required by several of the annotations could go here too.
+
+\nocite{*}
+
+\bibliographystyle{acmtrans}
+\bibliography{ar4gste}
+\end{document} 
