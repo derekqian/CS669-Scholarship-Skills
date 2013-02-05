@@ -1,0 +1,2 @@
+1. changed the title from "summary" to "Summary of 'Inferring Method Specifications from Natural Language API Descriptions'"
+2. changed "This paper" to "Pandita et al."
