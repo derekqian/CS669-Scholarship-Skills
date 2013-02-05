@@ -1,2 +1,7 @@
 1. changed the title from "summary" to "Summary of 'Inferring Method Specifications from Natural Language API Descriptions'"
-2. changed "This paper" to "Pandita et al."
+2. changed "This paper" to "Pandita et al." or "the authors"
+3. changed one complex sentences into simple sentences
+4. defined three terms
+5. resolved the ambiguity of two sentences
+6. changed one sentence into active voice
+7. corrected several grammer errors
