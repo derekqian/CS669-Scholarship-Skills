@@ -62,28 +62,54 @@ The hardware documents differ from the API documents in the following ways,
 \end{itemize}
 
 These differences make the construction of the relationships between the hardware related codes and their documents really challenging.
+To our knowlege, there is no tool exists to address this problem.
+People usually write down the position of the related document piece in the document as a comment of the code.
+This is a simple workaround as no easier tools are available.
+However, this method can only handle simple situations.
+If there are thousands of these comments, 
+and there are cluttered over in the code,
+then it will be very hard to manage.
 This paper presents coDoc, a tool to easily create, maintain, and display the relationships.
+% The initial version\footnote{\texttt{\url{git@github.com:derekqian/coDoc.git}}} has been released.
+The key features of coDoc are as follows,
+\begin{itemize}
+\item provide the ability to display code and document. 
+\item select code based on syntax parsing.
+\item stable to the change of unrelated code.
+\item make relationship between code and document.
+\item display the relationship.
+\end{itemize}
 
-One way to construct the relationship for hardware related code and its documents is to use machine learning method.
-This method need the seed data to train the model.
-
-Experiment result shows that, with our effert in this project, coDoc can provide forthfold, 
-1) provide the ability to display code and document. 
-2) select code based on syntax parsing.
-3) make relationship between code and document.
-4) analyze relationship.
-
-The initial version\footnote{\texttt{\url{http://web.cecs.pdx.edu/~cs533acc/arum.git}}} has been released.
+Using coDoc, we have created relationships for to virtual NIC devices fo qemu.
+These two devices are DIO and E100.
 
 The rest of the paper is orgnized as follows. 
-Section \ref{sec:methodology} introduce our implementation.
-Section \ref{sec:results} gives the experiment result of our implementation. 
+Section \ref{sec:background} introduce the background of poppler and CDT.
+Section \ref{sec:arch} provides the overall architecture and key features of coDoc.
+Section \ref{sec:decision} gives the design decisions of coDoc and the trade-offs of these decisions.
+Section \ref{sec:evaluation} summarizes our experiences of creating and maitaining the relationships for two virtual devices.
+Section \ref{sec:related} presents the related work.
 Section \ref{sec:conclusion} conclude our work and give some thinking towards the future.
 
+
 % Explain your design / languages, libraries, and tools used, experimental design.
-\section{Methodology}
-\label{sec:methodology}
-This section presents what we have done and how we did it.
+\section{Background}
+\label{sec:background}
+\subsection{poppler}
+We adopt poppler, a open-source pdf render, to render pdf content in coDoc.
+This PDF render is written in C++, 
+and is widely used in Linux systems.
+It uses Cairo and GTK to draw the rendered content.
+
+\subsection{C Development Tool}
+CDT is an Eclipse plugin which supports C/C++ syntax parsing.
+It is written in Java and provide Eclipse with the ability of syntax highlighting and code completion when developing C/C++ code.
+
+
+% This should NOT be raw data or code listings.  Instead you should present the key arch from your work.  Be guided by the papers you have read this quarter - in cases where it is necessary for understanding, a small section of code might be listed, separate from the text, but more commonly an algorithm might be shown.  Result are not long tables of data, rather, one or two graphs, or tables with key rows or columns highlighted or italicized.
+\section{Architecture and Features of coDoc}
+\label{sec:arch}
+The result for the experiment is shown in fig.
 
 \subsection{Build and Make existing code}
 On the first stage of our work, we tried to make the software user-friendly. Basically, the following work is done,
@@ -133,9 +159,16 @@ main & main function \\
 \label{table:functions}
 \end{table}
 
-% This should NOT be raw data or code listings.  Instead you should present the key results from your work.  Be guided by the papers you have read this quarter - in cases where it is necessary for understanding, a small section of code might be listed, separate from the text, but more commonly an algorithm might be shown.  Results are not long tables of data, rather, one or two graphs, or tables with key rows or columns highlighted or italicized.
-\section{Results}
-\label{sec:results}
+\section{Methodology and Design Decisions}
+\label{sec:decision}
+The result for the experiment is shown in fig.
+
+\section{Evaluation}
+\label{sec:evaluation}
+The result for the experiment is shown in fig.
+
+\section{Related Work}
+\label{sec:related}
 The result for the experiment is shown in fig.
 
 
@@ -143,6 +176,9 @@ The result for the experiment is shown in fig.
 \section{Conclusions and Future Work}
 \label{sec:conclusion}
 There is still a great deal of opportunity to improve coDoc.
+
+One way to construct the relationship for hardware related code and its documents is to use machine learning method.
+This method need the seed data to train the model.
 
 
 % Follow a standard ACM format for your references.  You have examples in the papers you have read.
