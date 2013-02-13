@@ -1,33 +1,77 @@
 
 \documentclass[11pt,letterpaper,oneside]{article}
 \usepackage[top=1in,left=1in,right=1in,bottom=1in]{geometry}
+\usepackage{textcomp}
 \usepackage{fancyvrb}
 \usepackage{colortbl}
 \usepackage{graphicx}
 \usepackage{url}
 
-\title{coDoc: A Tool for Managing Relationships between Driver code and Documents}
-\author{Dejun Qian\\Department of Computer Science\\Portland State University\\Portland, OR 97201\\dejun@pdx.edu}
+\title{coDoc: A Tool for Managing Relationships between Codes and Documents}
+\author{Dejun Qian}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-When writing software, 
-we need the documents in hand, 
-especially when we are developing driver software.
-This paper presents how we implement coDoc. 
-Experiment result shows that, with our effert in this project, coDoc can provide forthfold, 
-1) provide the ability to display code and document. 
-2) select code based on syntax parsing.
-3) make relationship between code and document.
-4) analyze relationship.
+When writing and testing software, 
+we need the documents in hand.
+This is extremely true for software that is document intensive, 
+such as hardware driver and virtual device.
+This paper presents coDoc, 
+an integrated development environment for managing relationships between codes and documents. 
+We first describe the architecture and features of coDoc.
+We then discuss several design decisions that we faced in developing coDoc and the trade-offs in making these decisions.
+To provide perspective,
+we report our experiences in mapping two virtual network interface card (NIC) to the real NIC documents.
 \end{abstract}
 
 % Include the motivation for your work, your approach, your goals, and a short summary of what you found/achieved/tested.
 \section{Introduction}
 \label{sec:introduction}
-Verification for software is very important. \cite{xiao_automated_2012}.
+Documents play an important role in software engineering process,
+from requirement analysis to architecture design,
+from code written to software testing,
+from software maitentence to software updating.
+Software that relates closely to hardware devices is extremely document intensive.
+Examples of these software could be bootloader, 
+Operating System (OS) Hardware Abstraction Layer (HAL),
+virtual devices of virtual machines.
+These software should conform to hardware documents.
+A typical embedded CPU usually have documents with thousands of pages.
+A computer system usually is consisted of over ten hardware modules.
+To effectively maintain the relationships between the codes and the documents is really important for developing and verification of these software.
+
+Many work has been done to deal with the relationships between Application Programming Interface (API) documents and its client codes \cite{Pandita_inferring_2012}.
+API documents are usually well indexed by the functions or the class.
+When we are interested in a piece of code in the client software,
+we can easily find the related API document by the invoded function.
+The relationships between the client codes and the API documents are easily constructed by using the function name as the keyword.
+However, the code related to hardware and its documents are usually related in a different way.
+The main reason is that the hardware document usually talks about how to use the hardware,
+more specifically how to program the registers inside the hardware module.
+Different from the API document,
+we can not locate the document for a piece of hardware related code, and vice versa,
+because there exists no similar keywork like the function name or the class name.
+
+The hardware documents differ from the API documents in the following ways,
+\begin{itemize}
+\item the hardware documents are usually published as pdf files, while the API documents are usually html files
+\item the hardware documents are composed of texts, tables and diagrams, while the API documents are usually texts only
+\item hard for the computer to relate the document piece to the code piece automatically
+\end{itemize}
+
+These differences make the construction of the relationships between the hardware related codes and their documents really challenging.
+This paper presents coDoc, a tool to easily create, maintain, and display the relationships.
+
+One way to construct the relationship for hardware related code and its documents is to use machine learning method.
+This method need the seed data to train the model.
+
+Experiment result shows that, with our effert in this project, coDoc can provide forthfold, 
+1) provide the ability to display code and document. 
+2) select code based on syntax parsing.
+3) make relationship between code and document.
+4) analyze relationship.
 
 The initial version\footnote{\texttt{\url{http://web.cecs.pdx.edu/~cs533acc/arum.git}}} has been released.
 
