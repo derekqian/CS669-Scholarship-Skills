@@ -49,79 +49,75 @@ A computer system usually consistes of over ten hardware modules.
 To effectively maintain the relationships between the codes and the documents is really important for developing and verification of these software.
 
 Much work has been done to deal with the relationships between Application Programming Interface (API) documents and their client codes \cite{Pandita_inferring_2012}.
-API documents are usually well indexed by the functions or the class.
+API documents are usually well indexed by the functions or the classes.
 When we are interested in a piece of code in the client software,
-we can easily find the related API document by the invoded function.
-The relationships between the client codes and the API documents are easily constructed by using the function name as the keyword.
-However, the code related to hardware and its documents are usually related in a different way.
-The main reason is that the hardware document usually talks about how to use the hardware,
-more specifically how to program the registers inside the hardware module.
-Different from the API document,
-we can not locate the document for a piece of hardware related code, and vice versa,
-because there exists no similar keywork like the function name or the class name.
-
+we can easily find the related API documents by the name of the functions that the piece of code calls.
+The relationships between the client codes and the API documents can be easily constructed by using the function names as the keywords.
+However, the codes related to hardware and their documents are usually related in different ways.
+The hardware documents usually talk about how to use the hardware,
+more specifically how to program the registers inside the hardware modules.
 The hardware documents differ from the API documents in the following ways,
 \begin{itemize}
-\item the hardware documents are usually published as pdf files, while the API documents are usually html files
-\item the hardware documents are composed of texts, tables and diagrams, while the API documents are usually texts only
-\item hard for the computer to relate the document piece to the code piece automatically
+\item the hardware documents are usually published as pdf files, while the API documents are usually html files.
+\item the hardware documents are composed of texts, tables and diagrams, while the API documents are usually texts only.
+\item the hardware docuemnts are not orgnized by functions or classes, which are basic elements of codes.
+\item hard for the computer to relate the hardware document pieces to the code pieces automatically.
 \end{itemize}
 
-These differences make the construction of the relationships between the hardware related codes and their documents really challenging.
-To our knowlege, there is no tool exists to address this problem.
-People usually write down the position of the related document piece in the document as a comment of the code.
-This is a simple workaround as no easier tools are available.
+These differences make the constructing of the relationships between the hardware related codes and their documents really challenging.
+To our knowlege, there is no tools exist to address this problem.
+A simple workaround used is to include the positions of the related document pieces in the documents as comments the codes.
 However, this method can only handle simple situations.
-If there are thousands of these comments, 
-and there are cluttered over in the code,
-then it will be very hard to manage.
+If there are thousands of these comments cluttered in the codes,
+it will be very hard to manage them.
 This paper presents coDoc, a tool to easily create, maintain, and display the relationships.
 % The initial version\footnote{\texttt{\url{git@github.com:derekqian/coDoc.git}}} has been released.
 The key features of coDoc are as follows,
 \begin{itemize}
-\item provide the ability to display code and document. 
-\item select code based on syntax parsing.
-\item stable to the change of unrelated code.
-\item make relationship between code and document.
-\item display the relationship.
+\item provide the ability to display codes and documents.
+\item provide the ability to develop codes.
+\item select code pieces based on syntax tree of the code.
+\item code selections are stable to the changes of unrelated codes.
+\item create relationships between codes and documents.
+\item manage and display the relationships.
 \end{itemize}
 
-Using coDoc, we have created relationships for to virtual NIC devices fo qemu.
+Using coDoc, we have created relationships for two virtual NIC devices in QEMU.
 These two devices are DIO and E100.
 
-The main contributions of this paper are list as follows,
+The main contributions of this paper are listed as follows,
 \begin{itemize}
-\item address the diffeculty of remain the integrity of the relationships when codes change
-\item present a standard format for the code piece identifier
-\item a standard format for the document piece identifier
-\item a standard format for the relationship between the code and document
-\item implement coDoc which adopts these standard formats
+\item design a framework to display and manage codes, documents and relationships.
+\item remain integrity of the relationships when the codes evolve.
+\item present a standard format for the code piece identifier.
+\item a standard format for the document piece identifier.
+\item a standard format for the relationship between the code and document.
+\item implement coDoc which adopts these standard formats.
 \end{itemize}
 
 The rest of the paper is orgnized as follows. 
-Section \ref{sec:background} introduce the background of poppler and CDT.
+Section \ref{sec:background} introduces the background of poppler and CDT.
 Section \ref{sec:arch} provides the overall architecture and key features of coDoc.
 Section \ref{sec:decision} gives the design decisions of coDoc and the trade-offs of these decisions.
 Section \ref{sec:evaluation} summarizes our experiences of creating and maitaining the relationships for two virtual devices.
 Section \ref{sec:related} presents the related work.
-Section \ref{sec:conclusion} conclude our work and give some thinking towards the future.
+Section \ref{sec:conclusion} concludes our work and gives some thinking towards the future.
 
 
-% Explain your design / languages, libraries, and tools used, experimental design.
 \section{Background}
 \label{sec:background}
 \subsection{poppler}
-We adopt poppler, a open-source pdf render, to render pdf content in coDoc.
+We adopt poppler, a open-source PDF render, to render PDF content in coDoc.
 This PDF render is written in C++, 
 and is widely used in Linux systems.
 It uses Cairo and GTK to draw the rendered content.
 
-\subsection{C Development Tool}
-CDT is an Eclipse plugin which supports C/C++ syntax parsing.
-It is written in Java and provide Eclipse with the ability of syntax highlighting and code completion when developing C/C++ code.
+\subsection{C/C++ Development Tool}
+C/C++ Development Tool (CDT) is an Eclipse plugin which supports C/C++ syntax parsing.
+It is written in Java and provides Eclipse with the ability of syntax highlighting and code completing when developing C/C++ codes.
 
 
-% This should NOT be raw data or code listings.  Instead you should present the key arch from your work.  Be guided by the papers you have read this quarter - in cases where it is necessary for understanding, a small section of code might be listed, separate from the text, but more commonly an algorithm might be shown.  Result are not long tables of data, rather, one or two graphs, or tables with key rows or columns highlighted or italicized.
+
 \section{Architecture and Features of coDoc}
 \label{sec:arch}
 
@@ -140,12 +136,12 @@ We only handle C/C++ code at this time,
 as most system code are written in this language.
 CDT editor reads and parses the codes, 
 highlights syntax elements.
-We use poppler to read the pdf file and render the pdf pages to images.
+We use poppler to read the PDF file and render the PDF pages to images.
 As poppler is developed in C++, and Eclipse RCP is in Java language,
-we need a adaptor to bridge the C++ code and the Java code.
+we need an adaptor to bridge the C++ code and the Java code.
 We use JNI to implement this adaptor.
 PDF editor implements an adaptor, 
-and use it to get the PDF page from poppler and display it.
+and uses it to get the PDF page from poppler and displays the page.
 The multi-editor is responsible to read the relationship data,
 and highlight certain code piece and document piece respectively.
 To represent a relationship, 
@@ -154,26 +150,26 @@ we first need to define the strategy to identify the code piece and document pie
 
 \subsection{Identifying the Code Piece}
 The codes are always evolving during its lifetime.
-We don't want our relationships created for one version stopped working for other version.
-This goal call for a robust identifying strategy for the code piece.
-Our first method used to identify the code piece is to record the offset of the select code from the beginning of the code file and the selected length.
+We don't want our relationships created for one version stop working for other versions.
+This goal calls for a robust identifying strategy for the code piece.
+Our first method identifies the code piece as the offset of the selected code from the beginning of the code file and the selected length.
 This method is straight forward and is easy to understand and implement.
 However, this method definitely will violate the robust requirement.
 To achieve the goal, we need to find some properties of the code that are relatively stable when code evolves.
-These properties should also can serve as the key to uniquely identify the code piece.
+These properties should also can serve as a key to uniquely identify the code piece.
 The intuitive thought is to use the semantic information,
 as it describes the intrinsical meaning of the code.
 However, there is no formal method to describe this information.
-We use syntax information in our approach to form the main element of our identifier.
+We use syntax information to form the main element of our identifier.
 The code can be parsed and represented by a syntax tree.
-The change of the code in one branch will usually not affect the code branch in the other.
+The change of the code in one branch will usually not affect the code in the other branches.
 If we can identify the code piece based on the position in the syntax tree,
 we can design a robust method to identify the code piece.
 To make the method more robust,
-we can introduce the information in the first method as the second key.
+we can introduce the information in the first method as the secondary key.
 When the syntax identifier fails to locate the code piece,
-we can use the offset information to assited the decision.
-We also include in the identifier the content for the integrity check.
+we can use the offset information to assist the decision.
+We also include in the identifier the content of the code piece for the integrity check.
 The structure used to achieve this goal is shown bellow,
 \begin{Verbatim}[frame=single]
 class CodeSelection {
@@ -191,10 +187,10 @@ class CodeSelection {
 The tool should display both codes and documents at the same time.
 We can implement the code viewer and the PDF viewer in seperate process,
 and use inner process communication (IPC) techniques to synchronize.
-The advantage of this method is that each windows is in their own window,
+The advantage of this method is that each process has its own window,
 can ocuppy the whole screen,
-and display more content which eliminate the need to scroll the window horizontally.
-When the user uses a computer with dual monitor,
+and display more content which reduces the need to scroll the window horizontally.
+When the user uses a computer with two monitors,
 the tool implementing this method is extremely a good choice,
 as the user can choose to display the code and the document in seperate moniter.
 However, this implementation is heavy,
@@ -210,13 +206,13 @@ This way, all the commucations are done in the same process.
 No IPC communication is needed,
 which is more efficient and makes the tool more user-friendly.
 With the new method, we can smoothly operate the tool without any uncomfortable feeling.
-The advantage of the first method come the disadvantage of the new method,
+The advantage of the first method become the disadvantage of the new method,
 as the code viwer and the document viwer should share the whole screen now.
 However, with a efficient and user-friendly screen split strategy and screen area assignment method,
 we can make the user feel less uncomfortable when viewing the content.
-Also, most programmer now not only are using dual moniters, 
+Also, most programmer now not only are using two moniters, 
 but also the moniters they are using are larger and larger.
-Using a larger moniter with high definition will make this disadvantage point nothing.
+Using a larger moniter with high definition will make this disadvantage nothing.
 And even better, in this situation, this method will overcome the first method,
 as moving the eyes between two big moniter is energy consuming.
 
@@ -231,8 +227,8 @@ XML database is very suitable for our semi-structured data here.
 
 \section{Evaluation}
 \label{sec:evaluation}
-\textbf{Effectiveness.} We have evaluated coDoc by mapping two virtual devices and their related document.
-The number of relationships created and the time used to created these relationships is listed in Table \ref{table:evaluate}.
+\textbf{Effectiveness.} We have evaluated coDoc by mapping two virtual devices and their related documents.
+The number of relationships created and the time used to created these relationships are listed in Table \ref{table:evaluate}.
 
 \begin{table}[th]
 \caption{Evaluate Result}
@@ -249,32 +245,31 @@ e100  & 213 & 4\\
 \end{table}
 
 The fine granularity of the identifying method makes the relationship results very accurate, 
-80\% of the code piece are marked inside the statement.
-This result is hard for comment based method to achieve.
+80\% of the code pieces are marked inside the statement.
+This result is hard for comment-based method to achieve.
 The same result happens for the document.
 In the whole relationships, 
-90\% of the document pieces are marked as on cell in a table.
+90\% of the document pieces are marked on cells in the tables.
 The comments in the PDF file will be too crowd to be useful,
 as it will affect the normal reading of the document.
 Our approach can also make the development efficient,
-as we don't need the developer to change both the code and the document when only relationship is created.
-This makes the code and document neat and easily to read and understand,
-and will them be understand effeciently.
+as we don't need the developer to change either the code or the document while only relationship is created.
+This makes the code and document neat and easily to read and understand.
 
 \noindent \textbf{Usability.} We implement coDoc as an Elipse\footnote{\texttt{\url{http://www.eclipse.org}}} Rich Client Program (RCP), 
-which can make our tool share the user style with Elipse that is acustomed by many programmer.
+which can make our tool share the use style with Elipse that is acustomed by many programmer.
 Figure \ref{fig:platformview} is the screenshot of the tool.
-Three persons with no exprience with coDoc before have successfully use this tool to created the relationships for their codes and documents.
+Three persons with no exprience with coDoc before have successfully use this tool to create the relationships for their codes and documents.
 They didn't find any difficulties when using this tool.
 All the feedbacks are positive regarding to the use of the tool.
 Now they can easily create their relationships by selecting the code and document piece using mouse, input the comment using keyboard.
 They can also manage the relationships by sorting by attributes, search certain relationships by keywords.
-They also find the feature that allow to categorize the relationships helpful,
-as it makes the relationships more neat when the number of relationships is large.
+They also find the feature that allow them to categorize the relationships helpful.
+This feature makes the relationships more neat when the number of relationships is large.
 
 In our own experience, we found that the ability to see the codes, 
 the documents and the relationships in the same screen really saves a lot of time,
-as we don't need to switch between different softwares.
+as we don't need to switch between different tools.
 The visualized interface also saved us time to learn the detailed syntax about the identifier formats,
 and to write the identifier manually.
 We believe this tool will lead to increased productivity.
@@ -293,34 +288,34 @@ We believe this tool will lead to increased productivity.
 \label{sec:related}
 Current tools can manage codes. 
 These kinds of tools include revision control software like git, svn. 
-Revision tools can give the evolving history of the software.
-These tools usually adopt text comparation tools to figure out the differences between the versions of the software.
-The comparation tools can easily give the result about the match points and mismatch points in the codes,
+Revision control tools can give the evolving history of the software.
+These tools usually adopt text comparison tools to figure out the differences between different versions of the software.
+The comparation tools can easily give the result about the matching points and mismatching points in the codes,
 which means they can manage the relationships between different versions of codes.
 However, these tools are not designed to manage documents.
 Though some people also use them to manage documents,
 they only use it as a persistent data warehouse.
-They can not take the advantages of the comparation tools, 
-as these tool usually can only cope with text file.
+They can not take the advantages of the comparison tools, 
+as these tool usually can only deal with text file.
 People are using code comments to record the related document piece.
 However, no consistent format exists,
 which makes these information not managable,
 especially when these comments are made by many different developers.
 
 Full text indexing system is developed to processing documents.
-However, they can only relate the keyword to certain documents.
+However, they can only relate keywords to certain documents.
 They do not deal with both codes and documents. 
 Like full text indexing system,
 search engines also work with documents in similar way.
-Most of the documents that are dealed by search engines are web pages.
+Most of the documents that are handled by search engines are web pages.
 Many PDF readers can support highlighting and commenting.
 With these features, we can relate a document piece to a code piece.
 However, these links created are not stable,
-and the PDF readers can not check the integrity of these information.
+and PDF readers can not check the integrity of these information.
 
-Generally speaking, these are tools can either handle code management or document management.
+Generally speaking, these are tools can either do code management or do document management.
 However, they are not designed to do both,
-and managing the mixture of codes and documents is definitely a mission impossible task for them.
+and managing the relationships between codes and documents is definitely a mission impossible task for them.
 
 
 % Based on what you have so far, what can you conclude?  What cool ideas did you think up but not have time to implement so far?
@@ -330,15 +325,14 @@ We implement coDoc,
 a tool to managing the relationships between the hardware related codes and their documents.
 The main contributions in this paper are the method to identify the code piece.
 Our experiences of using coDoc to manage two virtual device codes and their documents show the tool is robust and efficent,
-and is helpful when developing the virtual devices.
-It can remain stable respect to the evolution of the codes.
+and is helpful when developing and maitaining the virtual devices.
+The relationships remain stable respect to the evolution of the codes.
 
-There is still a great deal of opportunity to improve coDoc, 
+There are still opportunities to improve coDoc, 
 \begin{enumerate}
 \item combine it with revision control tools to provide a more user-friendly tool suit for developing and maitaining the codes while managing the documents at the same time.
-\item more robust method to identify the document piece in the PDF document to make the tool invariant to the change of the document.
-\item one way to construct the relationship for hardware related code and its documents is to use machine learning method.
-This method need the seed data to train the model.
+\item more robust method to identify the document pieces in the PDF documents to make the tool invariant to the change of the documents.
+\item use machine learning method (use the data created as seed to train the model) to construct and check the relationships between hardware related codes and their documents.
 \end{enumerate}
 
 
