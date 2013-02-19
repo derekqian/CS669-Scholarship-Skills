@@ -23,13 +23,13 @@
 When writing and testing software, 
 we need the documents in hand.
 This is extremely true for software that is document intensive, 
-such as hardware driver and virtual device.
+such as hardware driver and virtual device modules.
 This paper presents coDoc, 
 an integrated development environment for managing relationships between codes and documents, as well as developing the codes. 
-We first describe the architecture and features of coDoc.
+We first describe the architecture and the features of coDoc.
 We then discuss several design decisions that we faced in developing coDoc and the trade-offs in making these decisions.
 To provide perspective,
-we report our experiences in mapping two virtual network interface card (NIC) to the real NIC documents.
+we report our experiences in mapping two virtual network interface card (NIC) modules to the real NIC documents.
 \end{abstract}
 
 % Include the motivation for your work, your approach, your goals, and a short summary of what you found/achieved/tested.
@@ -37,18 +37,18 @@ we report our experiences in mapping two virtual network interface card (NIC) to
 \label{sec:introduction}
 Documents play an important role in software engineering process,
 from requirement analysis to architecture design,
-from code written to software testing,
-from software maitentence to software updating.
+from code writting to software testing,
+from software maintainence to software upgrading.
 Software that relates closely to hardware devices is extremely document intensive.
 Examples of these software could be bootloader, 
 Operating System (OS) Hardware Abstraction Layer (HAL),
 virtual devices of virtual machines.
-These software should conform to hardware documents.
+These software should conform to hardware documents to operate correctly.
 A typical embedded CPU usually have documents with thousands of pages.
-A computer system usually is consisted of over ten hardware modules.
+A computer system usually consistes of over ten hardware modules.
 To effectively maintain the relationships between the codes and the documents is really important for developing and verification of these software.
 
-Many work has been done to deal with the relationships between Application Programming Interface (API) documents and its client codes \cite{Pandita_inferring_2012}.
+Much work has been done to deal with the relationships between Application Programming Interface (API) documents and their client codes \cite{Pandita_inferring_2012}.
 API documents are usually well indexed by the functions or the class.
 When we are interested in a piece of code in the client software,
 we can easily find the related API document by the invoded function.
