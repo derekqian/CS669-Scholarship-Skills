@@ -1,0 +1,46 @@
+\documentclass[11pt,letterpaper,oneside]{article}
+\usepackage[top=0.5in,left=1in,right=1in,bottom=1in]{geometry}
+\usepackage{fancyvrb}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage{url}
+
+\title{Good and Bad Graphics}
+\author{Dejun Qian\\electronseu@gmail.com}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+% Explain the source of the graphic and the idea you think the author was trying to represent.
+% Create a digital version of the graphic (for example a pdf or png (portable network graphics) file)
+% Explain why you think the graphic is a good or bad representation of the idea.
+
+I got the two graphics by searching in Google Image using keyword ``teach''. Google Image gives a bunch of images. I choose one that I think is good and one that I think is bad. Both of these two graphics are trying to illustrate the meaning of ``teach''.
+
+Figure \ref{fig:good} \cite{bib:good} is the good one. The graphic directly shows one teacher is teaching two students. The meaning is very straightforward. The graphic is composed of simple elements, like cricles and rectangles, which makes the meaning of the graphic stand out.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{teaching.eps}
+\caption{A Good Graphic Explaining Teaching}
+\label{fig:good}
+\end{center}
+\end{figure}
+
+Figure \ref{fig:bad} \cite{bib:bad} is the bad one. From this graphic, I cannot see the meaning of ``teach''. The apple tells nothing about teaching. The blackboard and the chalk are related to teaching. However, it is not straightforward for me to get the meaning of ``teach''.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.55\textwidth]{teach-for-america.eps}
+\caption{A Bad Graphic Explaining Teaching}
+\label{fig:bad}
+\end{center}
+\end{figure}
+
+
+\bibliographystyle{acm}
+\bibliography{reference}
+
+\end{document}
