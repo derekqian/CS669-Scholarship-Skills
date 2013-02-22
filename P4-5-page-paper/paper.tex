@@ -184,48 +184,48 @@ class CodeSelection {
 \subsection{Embedded vs Seperate for PDF Reader}
 The tool should display both codes and documents at the same time.
 We can implement the code viewer and the PDF viewer in seperate process,
-and use inner process communication (IPC) techniques to synchronize.
+and use inter process communication (IPC) techniques to communicate.
 The advantage of this method is that each process has its own window,
-can ocuppy the whole screen,
+can occupy the whole screen,
 and display more content which reduces the need to scroll the window horizontally.
 When the user uses a computer with two monitors,
-the tool implementing this method is extremely a good choice,
-as the user can choose to display the code and the document in seperate moniter.
-However, this implementation is heavy,
-and get performance issues.
+the tool implementing this method is an extremely good choice,
+as the user can choose to display the code and the document on seperate moniters.
+However, this implementation is heavy, % ?
+and has performance issues.
 When using the tool, 
 the user may need to launch the PDF reader,
 which is slow.
-Our earlier implementation use this method,
-and encountered a lot of synchronization problems oriatated from the IPC communication.
-In coDoc, we choose to implement the code viewer and the code viewer in the same process.
-This way, all the commucations are done in the same process.
+Our earlest implementation uses this method,
+and encountered synchronization problems from the IPC communication.
+In coDoc, we choose to implement the code viewer and the PDF viewer in the same process.
 %The Eclipse framework even makes the whole system single thread.
-No IPC communication is needed,
-which is more efficient and makes the tool more user-friendly.
-With the new method, we can smoothly operate the tool without any uncomfortable feeling.
-The advantage of the first method become the disadvantage of the new method,
-as the code viwer and the document viwer should share the whole screen now.
-However, with a efficient and user-friendly screen split strategy and screen area assignment method,
+This way, all the commucation is internal to the same process,
+%No IPC communication is needed,
+which is more efficient and makes the tool more responsive.
+%With the new method, we can smoothly operate the tool without any uncomfortable feeling.
+The advantages of the first method become the disadvantage of the new method,
+as the code viwer and the document viwer must share the whole screen now.
+However, with a efficient and user-friendly method of assigning screen area,
 we can make the user feel less uncomfortable when viewing the content.
-Also, most programmer now not only are using two moniters, 
+Also, most programmer now not only are using two moniters, % prove
 but also the moniters they are using are larger and larger.
-Using a larger moniter with high definition will make this disadvantage nothing.
+Using a larger moniter with high definition will make this disadvantage nothing. % need revisement
 And even better, in this situation, this method will overcome the first method,
 as moving the eyes between two big moniter is energy consuming.
 
 \subsection{Relationship Store Model}
-In coDoc, we store the relationship data in XML file, 
-instead of the SQL database.
-The reason that we didn't use a SQL database is that the relationships is semi-structured,
+In coDoc, we store the relationship data in an XML file, 
+rather than a SQL database.
+The reason that we didn't use an SQL database is that the relationships are semi-structured,
 as we decide to store the content along with the identifier.
 The content is used to further check the integrity.
-XML database is very suitable for our semi-structured data here.
+XML database is very suitable for our semi-structured data. % why
 
 
 \section{Evaluation}
 \label{sec:evaluation}
-\textbf{Effectiveness.} We have evaluated coDoc by mapping two virtual devices and their related documents.
+\textbf{Effectiveness.} We evaluated coDoc by setting up relationships between the code for two virtual devices and their related documents.
 The number of relationships created and the time used to created these relationships are listed in Table \ref{table:evaluate}.
 
 \begin{table}[th]
