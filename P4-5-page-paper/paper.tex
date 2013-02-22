@@ -84,10 +84,10 @@ The key features of coDoc are as follows:
 Using coDoc, we have created relationships between two virtual NIC devices in QEMU and the related documents.
 These two devices are DIO \cite{dio} and E100.
 
-The main contributions of this paper are listed as follows,
+The main contributions of this paper are as follows.
 \begin{itemize}
 \item design a framework to display and manage codes, documents and relationships.
-\item remain integrity of the relationships when the codes evolve.
+\item maintain integrity of the relationships when the codes evolve.
 \item present a standard format for the code piece identifier.
 \item a standard format for the document piece identifier.
 \item a standard format for the relationship between the code and document.
@@ -112,8 +112,8 @@ and is widely used in Linux systems.
 It uses Cairo and GTK to draw the rendered content.
 
 \subsection{C/C++ Development Tool}
-C/C++ Development Tool (CDT) is an Eclipse plugin which supports C/C++ syntax parsing.
-It is written in Java and provides Eclipse with the ability of syntax highlighting and code completing when developing C/C++ codes.
+C/C++ Development Tool (CDT) is an Eclipse plugin that supports C/C++ syntax parsing.
+It is written in Java and provides Eclipse with syntax highlighting and code completion when developing in C or C++.
 
 
 
@@ -129,47 +129,46 @@ It is written in Java and provides Eclipse with the ability of syntax highlighti
 \end{figure}
 
 The architecture of coDoc is shown in Figure \ref{fig:architecture}. 
-It contains CDT editor, poppler, PDF editor and multi-editor.
-There are three kinds of data here, 1) the codes, 2) the documents, 3) the relationships.
-We only handle C/C++ code at this time, 
-as most system code are written in this language.
-CDT editor reads and parses the codes, 
-highlights syntax elements.
-We use poppler to read the PDF file and render the PDF pages to images.
-As poppler is developed in C++, and Eclipse RCP is in Java language,
-we need an adaptor to bridge the C++ code and the Java code.
-We use JNI to implement this adaptor.
-PDF editor implements an adaptor, 
-and uses it to get the PDF page from poppler and displays the page.
-The multi-editor is responsible to read the relationship data,
-and highlight certain code piece and document piece respectively.
+It contains a CDT editor, poppler, a PDF editor and a multi-editor.
+There are three kinds of data here, 1) the code, 2) the documentation, and 3) the relationships.
+We handle only C/C++ code at this time, 
+as most system code is written in C/C++.
+The CDT editor reads and parses the code, 
+and highlights syntax elements.
+We use poppler to read the PDF file and render the PDF pages as images.
+As poppler is developed in C++, and Eclipse Rich Client Program (RCP) is in Java,
+we need an adaptor to bridge between C++ and Java,
+for which we use Java Native Interface (JNI).
+We implement this adaptor in PDF Editor, 
+and uses it to get the PDF page from poppler and display the page.
+The multi-editor is responsible for reading the relationship data,
+and highlighting the code and document pieces that are related.
 To represent a relationship, 
 we first need to define the strategy to identify the code piece and document piece.
 
 
-\subsection{Identifying the Code Piece}
-The codes are always evolving during its lifetime.
-We don't want our relationships created for one version stop working for other versions.
-This goal calls for a robust identifying strategy for the code piece.
-Our first method identifies the code piece as the offset of the selected code from the beginning of the code file and the selected length.
+\subsection{Representing Code Segments}
+Code is always evolving during its lifetime.
+We don't want the relationships created for one version to stop working for other versions.
+This goal calls for a robust strategy identifying for the code piece.
+Our first method identifies the code piece as the offset of the selected code from the beginning of the code file and its length.
 This method is straight forward and is easy to understand and implement.
-However, this method definitely will violate the robust requirement.
-To achieve the goal, we need to find some properties of the code that are relatively stable when code evolves.
-These properties should also can serve as a key to uniquely identify the code piece.
+However, this method definitely does not satisfy the robustness requirement.
+To achieve robustness, we need to find some properties of the code that are relatively stable when code evolves.
+That can serve as a key to identify the code piece.
 The intuitive thought is to use the semantic information,
-as it describes the intrinsical meaning of the code.
-However, there is no formal method to describe this information.
-We use syntax information to form the main element of our identifier.
+that is the intrinsic meaning of the code.
+However, we can't find a formal way of defining this information.
+We use syntax information to form the main element of our code references.
 The code can be parsed and represented by a syntax tree.
-The change of the code in one branch will usually not affect the code in the other branches.
-If we can identify the code piece based on the position in the syntax tree,
-we can design a robust method to identify the code piece.
-To make the method more robust,
+A change of the code in one branch will usually not affect the code in other branches.
+Representing code segments based on the position in the syntax tree should be robust.
+To make the method more robust, % prof lost here
 we can introduce the information in the first method as the secondary key.
 When the syntax identifier fails to locate the code piece,
 we can use the offset information to assist the decision.
-We also include in the identifier the content of the code piece for the integrity check.
-The structure used to achieve this goal is shown bellow,
+We also include in the identifier the content of the code piece as an integrity check.
+The structure used to achieve this goal is shown bellow.
 \begin{Verbatim}[frame=single]
 class CodeSelection {
   private String syntaxcodepath;
