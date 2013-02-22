@@ -11,7 +11,7 @@
 \usepackage{setspace}
 \doublespacing
 
-\title{coDoc: A Tool for Managing Relationships between Codes and Documents}
+\title{coDoc: A Tool for Managing Relationships between Code and Documentation}
 \author{Dejun Qian\\electronseu@gmail.com}
 
 \date{}
@@ -21,69 +21,68 @@
 
 \begin{abstract}
 When writing and testing software, 
-we need the documents in hand.
-This is extremely true for software that is document intensive, 
-such as hardware driver and virtual device modules.
+lacking of the ability to efficiently refer to the related documentation hinders the productivity largely.
+This is particularly true for software that is documentation-intensive, 
+such as hardware drivers and virtual device modules.
 This paper presents coDoc, 
-an integrated development environment for managing relationships between codes and documents, as well as developing the codes. 
-We first describe the architecture and the features of coDoc.
-We then discuss several design decisions that we faced in developing coDoc and the trade-offs in making these decisions.
-To provide perspective,
-we report our experiences in mapping two virtual network interface card (NIC) modules to the real NIC documents.
+an integrated development environment for managing relationships between code and documentation, while developing the code. 
+We describe the architecture and features of coDoc,
+and discuss several design decisions that we faced in developing coDoc and the trade-offs involved in making these decisions.
+We report our experiences in mapping two virtual network interface card (NIC) modules to the real NIC documents by coDoc.
 \end{abstract}
 
-% Include the motivation for your work, your approach, your goals, and a short summary of what you found/achieved/tested.
+
 \section{Introduction}
 \label{sec:introduction}
-Documents play an important role in software engineering process,
-from requirement analysis to architecture design,
-from code writting to software testing,
-from software maintainence to software upgrading.
-Software that relates closely to hardware devices is extremely document intensive.
-Examples of these software could be bootloader, 
-Operating System (OS) Hardware Abstraction Layer (HAL),
-virtual devices of virtual machines.
-These software should conform to hardware documents to operate correctly.
-A typical embedded CPU usually have documents with thousands of pages.
-A computer system usually consistes of over ten hardware modules.
-To effectively maintain the relationships between the codes and the documents is really important for developing and verification of these software.
+Documents play an important role in the software engineering process,
+from requirements analysis to architecture design,
+from coding to software testing,
+from software debugging to software maintenance.
+Software that relates closely to hardware devices is extremely document intensive. % explain why
+Examples of such software include bootloaders, 
+Operating System (OS) Hardware Abstraction Layers (HAL),
+and virtual devices for virtual machines.
+Such software must follow the hardware documentation to operate correctly.
+A typical embedded CPU might have documentation consisting of thousands of pages.
+A computer system usually consists of more than ten hardware modules.
+Effectively maintaining the relationships between the code and the documentation is important for developing and verifying such software. % which software
 
-Much work has been done to deal with the relationships between Application Programming Interface (API) documents and their client codes \cite{Pandita_inferring_2012}.
-API documents are usually well indexed by the functions or the classes.
+Much work has been done to handle the relationships between Application Programming Interface (API) documents and their client code \cite{Pandita_inferring_2012} \cite{wei_inferring_2011}.
+API documents are usually well indexed by the functions or the classes that they define.
 When we are interested in a piece of code in the client software,
-we can easily find the related API documents by the name of the functions that the piece of code calls.
-The relationships between the client codes and the API documents can be easily constructed by using the function names as the keywords.
-However, the codes related to hardware and their documents are usually related in different ways.
+we can easily find the related API documents by the names of the functions that the piece of code calls.
+% The relationships between the client codes and the API documents can be easily constructed by using the function names as the keywords.
+However, the code relating to hardware and its documentation usually relate in different ways. % how?
 The hardware documents usually talk about how to use the hardware,
 more specifically how to program the registers inside the hardware modules.
-The hardware documents differ from the API documents in the following ways,
+The hardware documents differ from the API documents in the following ways.
 \begin{itemize}
-\item the hardware documents are usually published as pdf files, while the API documents are usually html files.
-\item the hardware documents are composed of texts, tables and diagrams, while the API documents are usually texts only.
-\item the hardware docuemnts are not orgnized by functions or classes, which are basic elements of codes.
-\item hard for the computer to relate the hardware document pieces to the code pieces automatically.
+\item the hardware documents are usually published as pdf files, while the API documents are usually html files. % matters?
+\item the hardware documents are composed of text, tables and diagrams, while the API documents are usually text only.
+\item the hardware docuemnts are not orgnized by functions or classes, which are the basic elements of code, but instead by hardware modules.
+\item as a consequence of these differences, it is hard for the computer to relate the hardware document pieces to the code pieces automatically.
 \end{itemize}
 
-These differences make the constructing of the relationships between the hardware related codes and their documents really challenging.
-To our knowlege, there is no tools exist to address this problem.
-A simple workaround used is to include the positions of the related document pieces in the documents as comments the codes.
-However, this method can only handle simple situations.
-If there are thousands of these comments cluttered in the codes,
+% These differences make the constructing of the relationships between the hardware related codes and their documents really challenging.
+To our knowlege, there are no tools to address this problem.
+A simple workaround is to include references to positions of the related documentation as comments in the codes.
+However, this can only handle simple situations.
+If there are thousands of such comments cluttered in the code,
 it will be very hard to manage them.
-This paper presents coDoc, a tool to easily create, maintain, and display the relationships.
+This paper presents coDoc, a tool to create, maintain, and display the relationships between code and documentation.
 % The initial version\footnote{\texttt{\url{git@github.com:derekqian/coDoc.git}}} has been released.
-The key features of coDoc are as follows,
+The key features of coDoc are as follows:
 \begin{itemize}
-\item provide the ability to display codes and documents.
-\item provide the ability to develop codes.
-\item select code pieces based on syntax tree of the code.
-\item code selections are stable to the changes of unrelated codes.
-\item create relationships between codes and documents.
-\item manage and display the relationships.
+\item the ability to display both code and documents;
+\item the ability to write and edit code;
+\item code pieces selection based on syntax tree of the code;
+\item stable code selections regarding to the changes of unrelated codes;
+\item creation of relationships between codes and documents;
+\item relationships management and display.
 \end{itemize}
 
-Using coDoc, we have created relationships for two virtual NIC devices in QEMU.
-These two devices are DIO and E100.
+Using coDoc, we have created relationships between two virtual NIC devices in QEMU and the related documents.
+These two devices are DIO \cite{dio} and E100.
 
 The main contributions of this paper are listed as follows,
 \begin{itemize}
