@@ -1,0 +1,64 @@
+
+1. When is the deadline (time & date)?
+Abstract Submission:	 May 10th 2013 (Friday)
+Paper Submission:	  May 17th 2013 (Friday)
+
+2. Is there a length limit? If so, what is it?
+Technical Research Papers and Experience Papers must not exceed 10 pages (including figures and appendices) plus up to 1 page that contains ONLY references.
+New Idea Papers must not exceed 6 pages (including figures, appendices AND references).
+
+3. Is a particular format required? If so, what is it?
+All submissions must come in PDF format and conform, at time of submission, to the IEEE Formatting Guidelines.
+
+4. How are contributions to be submitted (by post, e-mail, online submission system, etc.)
+The submission site will soon be posted here.
+
+5. How much time is there between the submission date and the Programme Committee (PC) Meeting? (Answer in weeks.)
+10
+
+6. How much time is there between the submission date and the conference or workshop? (Answer in weeks.)
+25
+
+7. Does the meeting have multiple “tracks”? If so, does each track have its own PC? Are submissions made to a particular track, or to the conference as a whole?
+Yes, it has mutiple "tracks".
+Yes, some tracks have their own PCs.
+Submissions are made to particular tracks.
+
+8. Roughly, how many submissions are there likely to be (or, submissions for your track)?
+Didn't find this information.
+
+9. What is the acceptance rate likely to be?
+Didn't find this information.
+
+10. How many members are there on the PC (or, on the PC for your track)?
+30
+
+11. How many reviews will each paper receive?
+No idea.
+
+12. How many reviews will each PC member write?
+No idea.
+
+13. Can you find the rating sheet used by the PC in previous years?
+No.
+
+14. Are you required to pledge to present your paper if it is accepted?
+No. All accepted papers have to be presented at the conference by one of the authors and will be published by IEEE.
+
+15. If your submission is accepted, will it be “published” in proceedings, or just made available to other attendees?
+All accepted papers will be published by IEEE.
+
+16. If your paper is accepted, will you be asked to relinquish your copyright as a condition of publication?
+No idea.
+
+17. If there will be published proceedings, who is the publisher?
+IEEE.
+
+18. Is review double-blind or single-blind?
+No idea.
+
+19. Is this meeting highly regarded in your field? What criteria did you use to answer this question?
+No idea.
+
+20. Who do you know who has attened or presented at this meeting in the last two years?
+http://people.engr.ncsu.edu/txie/publications.htm
