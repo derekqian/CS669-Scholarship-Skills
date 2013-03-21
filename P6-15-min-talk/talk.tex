@@ -84,7 +84,7 @@
   \fontsize{13.5}{11}\selectfont How to represent the code segments with
   \begin{itemize}
   \item code-evolving invariance,
-  \item good granularity,
+  \item flexible granularity,
   \item and non-ambiguity? %\normalsize
   \end{itemize}
   \begin{center}
@@ -100,30 +100,38 @@
 
 \section{Previous Solution}
 \subsection{Previous Solutions}
-\begin{frame}{\centerline{Previous Solutions}}
+\begin{frame}{\centerline{Previous Work}}
   \ \\
-  \fontsize{13.5}{11}\selectfont Previous work addresses this problem by
+  \fontsize{13.5}{11}\selectfont
   \begin{itemize}
-  \item comment-based representation
-  \item and offset-based representation.
+  \item Comment-based representation
+    \begin{itemize}
+      \item Javadoc uses this to write documentation for code segments.
+    \end{itemize}
+  \ \\
+  \ \\
+  \item Offset-based representation
+    \begin{itemize}
+      \item Compiler uses this method to highlight error code.
+    \end{itemize}
   \end{itemize}
 \end{frame}
 
 \subsection{Comment-Representation}
 \begin{frame}
-  \frametitle{\centerline{Comment-Based Representation (CBR)}}
+  \frametitle{\centerline{Comment-Based Representation}}
   \fontsize{13.5}{11}\selectfont
   \begin{columns}[c]
   \column{2.5in}  % slides are 3in high by 5in wide
-  advantage: 
+  Advantage
   \begin{itemize}
-  \item code-evolving invariance
+  \item Code-evolving invariance
   \end{itemize}
   \vspace{2em}
-  disadvantage: 
+  Disadvantage
   \begin{itemize}
-  \item bad granularity
-  \item ambiguity
+  \item Coarse granularity
+  \item Ambiguity
   \end{itemize}
   \column{1.5in}
   \includegraphics[height=.9\textheight]{comment}
@@ -132,19 +140,19 @@
 
 \subsection{Offset-Representation}
 \begin{frame}
-  \frametitle{\centerline{Offset-Based Representation (OBR)}}
+  \frametitle{\centerline{Offset-Based Representation}}
   \fontsize{13.5}{11}\selectfont
   \begin{columns}[c]
   \column{2in}  % slides are 3in high by 5in wide
-  advantage: 
+  Advantage
   \begin{itemize}
-  \item good granularity
-  \item no ambiguity
+  \item Flexible granularity
+  \item No ambiguity
   \end{itemize}
   \vspace{2em}
-  disadvantage: 
+  Disadvantage
   \begin{itemize}
-  \item stop working when code evolves
+  \item No code-evolving invariance
   \end{itemize}
   \column{2in}
   \includegraphics[height=.9\textheight]{offset}
@@ -167,7 +175,7 @@
 
 \subsection{Code-evolving Invariance}
 \begin{frame}
-  \frametitle{\centerline{AST-Based Representation (ABR)}}
+  \frametitle{\centerline{AST-Based Representation}}
   \begin{columns}[c]
   \column{1.8in}  % slides are 3in high by 5in wide
   \includegraphics[width=.9\textwidth]{code11}
@@ -217,9 +225,8 @@
 \section{Preliminary Result}
 \subsection{Preliminary Result}
 \begin{frame}{\centerline{Preliminary Result}}
-  \ \\
   \begin{center}
-  \includegraphics[width=\textwidth]{platformview}
+  \includegraphics[width=.9\textwidth]{platformview}
   \end{center}
 \end{frame}
 
@@ -227,24 +234,24 @@
 \begin{frame}[b]{\centerline{Preliminary Result}}
   \fontsize{13.5}{11}\selectfont
   \begin{itemize}
-  \item preserve all the relationships for this test case
-  \item provide good granularity
+  \item Preserve all the relationships after code evolves.
+  \item Provide flexible granularity and non-ambiguity.
   \end{itemize}
-  \centerline{\includegraphics[width=.9\textwidth]{platformview}}
+  \centerline{\includegraphics[width=.7\textwidth]{platformview}}
 \end{frame}
 
 \section{Conclusion}
 \begin{frame}[t]{\centerline{Conclusion}}
   \ \\
-  \fontsize{13.5}{11}\selectfont
+  \fontsize{10}{11}\selectfont
   \centerline{
-  \begin{tabular}{*{4}{c}}
+  \begin{tabular}{rccc}
     \toprule
-    Strategy & Invariance & Granularity & Non-Ambiguity \\
+    Representation & Code-evolving invariance & Flexible granularity & Non-ambiguity \\
     \midrule
-    CBR   & Yes & No  & No \\
-    OBR   & No  & Yes & Yes \\
-    ABR   & Yes & Yes & Yes \\
+    Comment based   & Yes & No  & No \\
+    Offset based   & No  & Yes & Yes \\
+    AST based   & Yes & Yes & Yes \\
     \bottomrule
   \end{tabular}
   }
@@ -253,15 +260,15 @@
 \section{Question}
 \begin{frame}[t]{\centerline{Conclusion}}
   \ \\
-  \fontsize{13.5}{11}\selectfont
+  \fontsize{10}{11}\selectfont
   \centerline{
-  \begin{tabular}{*{4}{c}}
+  \begin{tabular}{rccc}
     \toprule
-    Strategy & Invariance & Granularity & Non-Ambiguity \\
+    Representation & Code-evolving invariance & Flexible granularity & Non-ambiguity \\
     \midrule
-    CBR   & Yes & No  & No \\
-    OBR   & No  & Yes & Yes \\
-    ABR   & Yes & Yes & Yes \\
+    Comment based   & Yes & No  & No \\
+    Offset based   & No  & Yes & Yes \\
+    AST based   & Yes & Yes & Yes \\
     \bottomrule
   \end{tabular}
   }
