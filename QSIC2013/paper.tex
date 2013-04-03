@@ -1,0 +1,841 @@
+
+% Note that the a4paper option is mainly intended so that authors in
+% countries using A4 can easily print to A4 and see how their papers will
+% look in print - the typesetting of the document will not typically be
+% affected with changes in paper size (but the bottom and side margins will).
+% Use the testflow package mentioned above to verify correct handling of
+% both paper sizes by the user's LaTeX system.
+%
+% Also note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+%
+\documentclass[conference]{IEEEtran}
+% Add the compsoc option for Computer Society conferences.
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+
+
+
+% *** CITATION PACKAGES ***
+%
+\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
+% not currently provide for hyperlinked citations.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+
+
+
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+  \DeclareGraphicsExtensions{.pdf}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% *** MATH PACKAGES ***
+%
+%\usepackage[cmex10]{amsmath}
+% A popular package from the American Mathematical Society that provides
+% many useful and powerful commands for dealing with mathematics. If using
+% it, be sure to load this package with the cmex10 option to ensure that
+% only type 1 fonts will utilized at all point sizes. Without this option,
+% it is possible that some math symbols, particularly those within
+% footnotes, will be rendered in bitmap form which will result in a
+% document that can not be IEEE Xplore compliant!
+%
+% Also, note that the amsmath package sets \interdisplaylinepenalty to 10000
+% thus preventing page breaks from occurring within multiline equations. Use:
+%\interdisplaylinepenalty=2500
+% after loading amsmath to restore such page breaks as IEEEtran.cls normally
+% does. amsmath.sty is already installed on most LaTeX systems. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/amslatex/math/
+
+
+
+
+
+% *** SPECIALIZED LIST PACKAGES ***
+%
+%\usepackage{algorithmic}
+% algorithmic.sty was written by Peter Williams and Rogerio Brito.
+% This package provides an algorithmic environment fo describing algorithms.
+% You can use the algorithmic environment in-text or within a figure
+% environment to provide for a floating algorithm. Do NOT use the algorithm
+% floating environment provided by algorithm.sty (by the same authors) or
+% algorithm2e.sty (by Christophe Fiorio) as IEEE does not use dedicated
+% algorithm float types and packages that provide these will not provide
+% correct IEEE style captions. The latest version and documentation of
+% algorithmic.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithms/
+% There is also a support site at:
+% http://algorithms.berlios.de/index.html
+% Also of interest may be the (relatively newer and more customizable)
+% algorithmicx.sty package by Szasz Janos:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/algorithmicx/
+
+
+
+
+% *** ALIGNMENT PACKAGES ***
+%
+%\usepackage{array}
+% Frank Mittelbach's and David Carlisle's array.sty patches and improves
+% the standard LaTeX2e array and tabular environments to provide better
+% appearance and additional user controls. As the default LaTeX2e table
+% generation code is lacking to the point of almost being broken with
+% respect to the quality of the end results, all users are strongly
+% advised to use an enhanced (at the very least that provided by array.sty)
+% set of table tools. array.sty is already installed on most systems. The
+% latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/required/tools/
+
+
+%\usepackage{mdwmath}
+%\usepackage{mdwtab}
+% Also highly recommended is Mark Wooding's extremely powerful MDW tools,
+% especially mdwmath.sty and mdwtab.sty which are used to format equations
+% and tables, respectively. The MDWtools set is already installed on most
+% LaTeX systems. The lastest version and documentation is available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/mdwtools/
+
+
+% IEEEtran contains the IEEEeqnarray family of commands that can be used to
+% generate multiline equations as well as matrices, tables, etc., of high
+% quality.
+
+
+%\usepackage{eqparbox}
+% Also of notable interest is Scott Pakin's eqparbox package for creating
+% (automatically sized) equal width boxes - aka "natural width parboxes".
+% Available at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/eqparbox/
+
+
+
+
+
+% *** SUBFIGURE PACKAGES ***
+%\usepackage[tight,footnotesize]{subfigure}
+% subfigure.sty was written by Steven Douglas Cochran. This package makes it
+% easy to put subfigures in your figures. e.g., "Figure 1a and 1b". For IEEE
+% work, it is a good idea to load it with the tight package option to reduce
+% the amount of white space around the subfigures. subfigure.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at:
+% http://www.ctan.org/tex-archive/obsolete/macros/latex/contrib/subfigure/
+% subfigure.sty has been superceeded by subfig.sty.
+
+
+
+%\usepackage[caption=false]{caption}
+%\usepackage[font=footnotesize]{subfig}
+% subfig.sty, also written by Steven Douglas Cochran, is the modern
+% replacement for subfigure.sty. However, subfig.sty requires and
+% automatically loads Axel Sommerfeldt's caption.sty which will override
+% IEEEtran.cls handling of captions and this will result in nonIEEE style
+% figure/table captions. To prevent this problem, be sure and preload
+% caption.sty with its "caption=false" package option. This is will preserve
+% IEEEtran.cls handing of captions. Version 1.3 (2005/06/28) and later 
+% (recommended due to many improvements over 1.2) of subfig.sty supports
+% the caption=false option directly:
+%\usepackage[caption=false,font=footnotesize]{subfig}
+%
+% The latest version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/subfig/
+% The latest version and documentation of caption.sty can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/caption/
+
+
+
+
+% *** FLOAT PACKAGES ***
+%
+%\usepackage{fixltx2e}
+% fixltx2e, the successor to the earlier fix2col.sty, was written by
+% Frank Mittelbach and David Carlisle. This package corrects a few problems
+% in the LaTeX2e kernel, the most notable of which is that in current
+% LaTeX2e releases, the ordering of single and double column floats is not
+% guaranteed to be preserved. Thus, an unpatched LaTeX2e can allow a
+% single column figure to be placed prior to an earlier double column
+% figure. The latest version and documentation can be found at:
+% http://www.ctan.org/tex-archive/macros/latex/base/
+
+
+
+%\usepackage{stfloats}
+% stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
+% the ability to do double column floats at the bottom of the page as well
+% as the top. (e.g., "\begin{figure*}[!b]" is not normally possible in
+% LaTeX2e). It also provides a command:
+%\fnbelowfloat
+% to enable the placement of footnotes below bottom floats (the standard
+% LaTeX2e kernel puts them above bottom floats). This is an invasive package
+% which rewrites many portions of the LaTeX2e float routines. It may not work
+% with other packages that modify the LaTeX2e float routines. The latest
+% version and documentation can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/sttools/
+% Documentation is contained in the stfloats.sty comments as well as in the
+% presfull.pdf file. Do not use the stfloats baselinefloat ability as IEEE
+% does not allow \baselineskip to stretch. Authors submitting work to the
+% IEEE should note that IEEE rarely uses double column equations and
+% that authors should try to avoid such use. Do not be tempted to use the
+% cuted.sty or midfloat.sty packages (also by Sigitas Tolusis) as IEEE does
+% not format its papers in such ways.
+
+
+
+
+
+% *** PDF, URL AND HYPERLINK PACKAGES ***
+%
+\usepackage{url}
+% url.sty was written by Donald Arseneau. It provides better support for
+% handling and breaking URLs. url.sty is already installed on most LaTeX
+% systems. The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/misc/
+% Read the url.sty source comments for usage information. Basically,
+% \url{my_url_here}.
+
+
+
+
+
+% *** Do not adjust lengths that control margins, column widths, etc. ***
+% *** Do not use packages that alter fonts (such as pslatex).         ***
+% There should be no need to do such things with IEEEtran.cls V1.6 and later.
+% (Unless specifically asked to do so by the journal or conference you plan
+% to submit to, of course. )
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{coDoc: A Tool for Managing Relationships between Code and Documentation}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Xx Xxx}
+\IEEEauthorblockA{Computer Science\\
+Portland State University\\
+Portland, OR 97201\\
+Email: xx@cs.pdx.edu}
+\and
+\IEEEauthorblockN{Xx Xxx}
+\IEEEauthorblockA{Computer Science\\
+Portland State University\\
+Portland, OR 97201\\
+Email: xx@cs.pdx.edu}}
+
+% conference papers do not typically use \thanks and this command
+% is locked out in conference mode. If really needed, such as for
+% the acknowledgment of grants, issue a \IEEEoverridecommandlockouts
+% after \documentclass
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+%\author{\IEEEauthorblockN{Michael Shell\IEEEauthorrefmark{1},
+%Homer Simpson\IEEEauthorrefmark{2},
+%James Kirk\IEEEauthorrefmark{3}, 
+%Montgomery Scott\IEEEauthorrefmark{3} and
+%Eldon Tyrell\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+%Georgia Institute of Technology,
+%Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+%Email: homer@thesimpsons.com}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+%Telephone: (800) 555--1212, Fax: (888) 555--1212}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+
+
+% use for special paper notices
+%\IEEEspecialpapernotice{(Invited Paper)}
+
+
+
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+The reuse of either software or hardware components is an important way to build large systems.
+Documentation plays a critical role in the process of reusing,
+as it describes how the components can be reused.
+When writing and testing software, 
+we need the documentation in hand.
+This is particularly true for software that is documentation-intensive, 
+such as device drivers and virtual device modules.
+Effectively relating the code and documentation reliablly can help improving the productivity of the developer and the quality of the software.
+This paper presents coDoc, 
+an integrated development environment for managing relationships between code and documentation.
+We describe the architecture and features of coDoc,
+and discuss several design decisions that we faced in developing coDoc and the trade-offs involved in making these decisions.
+We report our experiences in mapping two virtual network interface card (NIC) modules to the real NIC documents by coDoc.
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+
+\begin{IEEEkeywords}
+relationship, quality assurance, abstract syntax tree, tool.
+\end{IEEEkeywords}
+
+
+
+
+% For peer review papers, you can put extra information on the cover
+% page as needed:
+% \ifCLASSOPTIONpeerreview
+% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
+% \fi
+%
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Introduction}
+% no \IEEEPARstart
+\label{sec:introduction}
+Documentation plays an important role in software engineering.
+%from requirement analysis to architecture design,
+%from coding to software testing,
+%from software debugging to software maintenance.
+Software that relates closely to hardware is extremely documentation intensive. % explain why
+Examples of such software include bootloaders, 
+Hardware Abstraction Layers (HAL) in Operating Systems (OS),
+and virtual device modules for virtual machines.
+Such software must follow the hardware documentation to operate correctly.
+A typical embedded CPU might have documentation consisting of thousands of pages.
+A computer system usually consists of more than ten hardware modules.
+Effectively maintaining the relationships between the code and the documentation is important for developing and verifying hardware-related software.
+
+To our knowledge, there are no tools to address this problem.
+Researchers have done a lot of work to handle the relationships between Application Programming Interface (API) documents and their client code \cite{Pandita_inferring_2012} \cite{wei_inferring_2011}.
+However, the approaches developed in the work do not consider the relationships between hardware-related code and its documentation.
+API documents are usually well indexed by the functions or the classes that they define.
+When we are interested in a piece of code in the client software
+we can easily find the related API documents by the names of the functions that the piece of code calls.
+% The relationships between the client codes and the API documents can be easily constructed by using the function names as the keywords.
+However, the code relating to hardware and its documentation usually relate in different ways.
+% the hardware docuemnts are not orgnized by functions or classes, which are the basic elements of code, but instead by hardware modules.
+People usually organize hardware documentation by hardware modules and the registers inside the hardware modules.
+These modules and registers do not relate to the code in an explicit way.
+Hardware documents include text, tables and diagrams, while API documents usually include text only.
+
+% These differences make the constructing of the relationships between the hardware related codes and their documents really challenging.
+A simple workaround is to include references to the positions of the related documentation as comments in the code.
+However, this can only handle simple situations.
+If there are thousands of such comments cluttered in the code,
+it will be very hard to manage them.
+
+This paper presents coDoc, a tool to create, maintain, and display relationships between code and documentation.
+% The initial version\footnote{\texttt{\url{git@github.com:derekqian/coDoc.git}}} has been released.
+The key features of coDoc include 
+the ability to display both code and documents, 
+the ability to write and edit code, 
+code-piece selection based on syntax tree of the code,
+%stable code selections regarding to the changes of unrelated codes;
+creation of relationships between codes and documents,
+and relationships management and display.
+Using coDoc, we have created relationships between two virtual NIC devices in QEMU and the related documents.
+These two devices are DIO \cite{dio} and E100 \cite{e100}.
+
+The main contributions of this paper are as follows.
+\begin{itemize}
+\item Design a framework to display and manage codes, documents and relationships.
+\item Design coDoc which implement the framework.
+\item Maintain integrity of the relationships when the code evolves.
+\item Design a standard format to represent the code piece.
+\item Design a standard format to represent the document piece.
+\item Design a data model for relationships between code and documentation.
+\end{itemize}
+
+The rest of the paper is organized as follows. 
+Section \ref{sec:arch} provides the overall architecture and key features of coDoc.
+%Section \ref{sec:decision} gives the design decisions of coDoc and the trade-offs of these decisions.
+Section \ref{sec:evaluation} summarizes our experiences of creating and maitaining the relationships for two virtual devices.
+Section \ref{sec:related} presents the related work.
+Section \ref{sec:conclusion} concludes our work and gives our future research plan.
+
+
+% An example of a floating figure using the graphicx package.
+% Note that \label must occur AFTER (or within) \caption.
+% For figures, \caption should occur after the \includegraphics.
+% Note that IEEEtran v1.7 and later has special internal code that
+% is designed to preserve the operation of \label within \caption
+% even when the captionsoff option is in effect. However, because
+% of issues like this, it may be the safest practice to put all your
+% \label just after \caption rather than within \caption{}.
+%
+% Reminder: the "draftcls" or "draftclsnofoot", not "draft", class
+% option should be used if it is desired that the figures are to be
+% displayed while in draft mode.
+%
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation Results}
+%\label{fig_sim}
+%\end{figure}
+
+% Note that IEEE typically puts floats only at the top, even when this
+% results in a large percentage of a column being occupied by floats.
+
+
+% An example of a double column floating figure using two subfigures.
+% (The subfig.sty package must be loaded for this to work.)
+% The subfigure \label commands are set within each subfloat command, the
+% \label for the overall figure must come after \caption.
+% \hfil must be used as a separator to get equal spacing.
+% The subfigure.sty package works much the same way, except \subfigure is
+% used instead of \subfloat.
+%
+%\begin{figure*}[!t]
+%\centerline{\subfloat[Case I]\includegraphics[width=2.5in]{subfigcase1}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{subfigcase2}%
+%\label{fig_second_case}}}
+%\caption{Simulation results}
+%\label{fig_sim}
+%\end{figure*}
+%
+% Note that often IEEE papers with subfigures do not employ subfigure
+% captions (using the optional argument to \subfloat), but instead will
+% reference/describe all of them (a), (b), etc., within the main caption.
+
+\section{Motivation}
+\label{sec:motivation}
+In this section, we illustrate our motivation through a example.
+
+\section{Architecture of coDoc}
+\label{sec:arch}
+
+\begin{figure}
+\centering
+\includegraphics[width=2.5in]{architecture}
+\caption{coDoc Architecture and Features}
+\label{fig:architecture}
+\end{figure}
+
+The architecture of coDoc is shown in Figure \ref{fig:architecture}. 
+It contains a code manager (CM), a documentation manager (DM) and a relationship manager (RM).
+There are three types of data here, 1) code, 2) documentation, and 3) relationships.
+We handle only C/C++ code at this time, 
+as most system code is written in C/C++.
+CM reuses C/C++ Development Tool (CDT) editor from Elipse\footnote{\texttt{\url{http://www.eclipse.org}}} to handle C/C++ code.
+The CDT editor reads and parses the code, 
+and highlights syntax elements.
+We use poppler to read the PDF file and render the PDF pages as images.
+As poppler is developed in C++ and Eclipse Rich Client Program (RCP) is in Java,
+we need an adaptor to bridge between C++ and Java,
+for which we use Java Native Interface (JNI).
+We implement this adaptor in PDF Editor, 
+and uses it to get the PDF page from poppler and display the page.
+RM reads the relationship data,
+and highlights the code and document pieces that are related.
+
+\subsection{CM}
+CM handles the code.
+
+\subsection{DM}
+DM handles the documentation.
+
+\subsection{RM}
+RM handles the relationships.
+
+
+\section{Data Model}
+
+\begin{figure}
+\centering
+\includegraphics[width=2.5in]{datamodel}
+\caption{Data Model for coDoc}
+\label{fig:datamodel}
+\end{figure}
+
+The data model is shown in Figure \ref{fig:datamodel}.
+We have four entities here: category, relationship, code piece and documentation piece.
+Code piece and documentation piece represent the selected code and documentation respectively.
+We represent the relationships between code and documentation as entities,
+as we want to classify the relationships.
+The relationships are classified by their functionality in our approach.
+Category is used to maintain the classification information of the relationships.
+To represent a relationship, 
+we need to define the strategy to represent the code piece and documentation piece.
+
+
+\begin{figure}
+\centering
+\includegraphics[width=2.5in]{ast1}
+\caption{Original code and its AST}
+\label{fig:ast1}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=2.5in]{ast2}
+\caption{Evolved code and its AST}
+\label{fig:ast2}
+\end{figure}
+
+\section{Representing Code Segments}
+Code is always evolving during its lifetime.
+We want the relationships created for one version of code keep working for other versions.
+To achieve this goal, we need a robust strategy to represent the code pieces.
+Our first method represents the code piece by the offset of the selected code from the beginning of the code file and the length of the selected code.
+This method is straight forward and is easy to understand and implement.
+However, this method is not robust,
+as the change of the code file will change the offset of the selected code.
+The left sides of Figure \ref{fig:ast1} and Figure \ref{fig:ast2} give the code before and after it evloves.
+The highlighted code piece is what we want to select.
+Unfortunitely, the offset of the select code increases after we add some code,
+as shown in this example.
+To achieve robustness, we need to find some properties of the code that are relatively stable when code evolves.
+These properties can serve as keys to represent the code piece.
+An intuitive thought is to use the semantic information,
+that is the intrinsic meaning of the code.
+However, we can't find a formal way of defining this information.
+We use syntax information to form the main element of our code piece identifier.
+The code can be parsed and represented by a syntax tree.
+A change of the code in one branch will usually not affect the code in other branches.
+Representing code segments based on the position in the syntax tree should be robust.
+The right sides of Figure \ref{fig:ast1} and Figure \ref{fig:ast2} are the Abstract Syntax Trees (AST) for the code before and after it evolves.
+In the ASTs, the highlighted nodes relate to the code piece we selected.
+Through the two ASTs are different, 
+the highlighted nodes can be represented by the same path from the roots of these two ASTs.
+%To make the method more robust, % prof lost here
+%we can introduce the information in the first method as the secondary key.
+%When the syntax identifier fails to locate the code piece,
+%we can use the offset information to assist the decision.
+%We also include in the identifier the content of the code piece as an integrity check.
+%The structure used to achieve this goal is shown bellow.
+%\begin{Verbatim}[frame=single]
+%class CodeSelection {
+%  private String syntaxcodepath;
+%  private String selcodepath;
+%  private String syntaxcodetext;
+%  private String selcodetext;
+%}
+%\end{Verbatim}
+
+
+%\section{Methodology and Design Decisions}
+%\label{sec:decision}
+%\subsection{Embedded vs Seperate for PDF Reader}
+%The tool should display both codes and documents at the same time.
+%We can implement the code viewer and the PDF viewer in seperate process,
+%and use inter process communication (IPC) techniques to communicate.
+%The advantage of this method is that each process has its own window,
+%can occupy the whole screen,
+%and display more content which reduces the need to scroll the window horizontally.
+%When the user uses a computer with two monitors,
+%the tool implementing this method is an extremely good choice,
+%as the user can choose to display the code and the document on seperate moniters.
+%However, this implementation is heavy, % ?
+%and has performance issues.
+%When using the tool, 
+%the user may need to launch the PDF reader,
+%which is slow.
+%Our earlest implementation uses this method,
+%and encountered synchronization problems from the IPC communication.
+%In coDoc, we choose to implement the code viewer and the PDF viewer in the same process.
+%%The Eclipse framework even makes the whole system single thread.
+%This way, all the commucation is internal to the same process,
+%No IPC communication is needed,
+%which is more efficient and makes the tool more responsive.
+%With the new method, we can smoothly operate the tool without any uncomfortable feeling.
+%The advantages of the first method become the disadvantage of the new method,
+%as the code viwer and the document viwer must share the whole screen now.
+%However, with a efficient and user-friendly method of assigning screen area,
+%we can make the user feel less uncomfortable when viewing the content.
+%Also, most programmer now not only are using two moniters, % prove
+%but also the moniters they are using are larger and larger.
+%Using a larger moniter with high definition will make this disadvantage nothing. % need revisement
+%And even better, in this situation, this method will overcome the first method,
+%as moving the eyes between two big moniter is energy consuming.
+
+
+% An example of a floating table. Note that, for IEEE style tables, the 
+% \caption command should come BEFORE the table. Table text will default to
+% \footnotesize as IEEE normally uses this smaller font for tables.
+% The \label must come after \caption as always.
+%
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+
+% Note that IEEE does not put floats in the very first column - or typically
+% anywhere on the first page for that matter. Also, in-text middle ("here")
+% positioning is not used. Most IEEE journals/conferences use top floats
+% exclusively. Note that, LaTeX2e, unlike IEEE journals/conferences, places
+% footnotes above bottom floats. This can be corrected via the \fnbelowfloat
+% command of the stfloats package.
+
+
+
+\section{Evaluation}
+\label{sec:evaluation}
+%We adopt poppler, a open-source PDF render, to render PDF content in coDoc.
+%This PDF render is written in C++, 
+%and is widely used in Linux systems.
+%It uses Cairo and GTK to draw the rendered content.
+
+
+\textbf{Effectiveness.} We evaluated coDoc by setting up relationships between the code for two virtual devices and their documentation.
+The number of relationships created and the time used to created these relationships are listed in Table \ref{table:evaluate}.
+
+\begin{table}[th]
+\caption{Evaluate Result}
+\centering
+\begin{tabular}{rcc}
+\hline
+Code & \# of Relationships & time(hr) \\
+\hline
+dio & 108 & 2 \\
+e100  & 213 & 4\\
+\hline
+\end{tabular}
+\label{table:evaluate}
+\end{table}
+
+The identifying method with fine granularity makes the relationship created by coDoc very accurate, 
+80\% of the code pieces are marked inside the statement.
+This result is hard for comment-based method to achieve.
+The same result happens for the document.
+In the whole relationships, 
+90\% of the document pieces are marked on cells in the tables.
+The comments in the PDF file will be too crowd to be useful,
+as it will affect the normal reading of the document.
+Our approach can also make the development efficient,
+as we don't need the developer to change either the code or the document while only relationship is created.
+This makes the code and document neat and easily to read and understand.
+
+\noindent \textbf{Usability.} We implemented coDoc as an Elipse Rich Client Program (RCP), 
+which can make our tool share the appearence in Eclipse that is familiar by many programmer.
+Figure \ref{fig:platformview} is the screenshot of the tool.
+Three persons with no prior exprience with coDoc have successfully use this tool to create the relationships between their codes and documentation.
+They didn't find any difficulties when using this tool.
+All the feedbacks has been positive regarding the use of the tool.
+%Now they can easily create their relationships by selecting the code and document piece using mouse, input the comment using keyboard.
+%They can also manage the relationships by sorting by attributes, search certain relationships by keywords.
+%They also find the feature that allow them to categorize the relationships helpful.
+%This feature makes the relationships neater when the number of relationships is large.
+
+In our own experience, we found that the ability to see the code, 
+the documentation and the relationships on the same screen saves a lot of time,
+as we don't need to switch between different tools.
+%The visualized interface also saved us time to learn the detailed syntax about the identifier formats,
+%and to write the identifier manually.
+We believe this tool will lead to increased productivity.
+
+% convert platformview.png platformview.eps
+\begin{figure}
+\centering
+\includegraphics[width=2.5in]{platformview}
+\caption{coDoc Platform View}
+\label{fig:platformview}
+\end{figure}
+
+
+\section{Related Work}
+\label{sec:related}
+Current tools can manage codes. 
+These kinds of tools include revision control software like git, svn \cite{git} \cite{svn}. 
+Revision control tools can give the evolving history of the software.
+These tools usually adopt text comparison tools to figure out the differences between different versions of the software.
+The comparation tools can easily give the result about the matching points and mismatching points in the codes,
+which means they can manage the relationships between different versions of codes.
+However, these tools are not designed to manage documents.
+Though some people also use them to manage documents,
+they only use it as a persistent data warehouse.
+They can not take the advantages of the comparison tools, 
+as these tool usually can only deal with text file.
+People are using code comments to record the related document piece.
+However, no consistent format exists,
+which makes these information not managable,
+especially when these comments are made by many different developers.
+
+Full text indexing system is developed to processing documents \cite{lucene}.
+However, they can only relate keywords to certain documents.
+They do not deal with both codes and documents. 
+Like full text indexing system,
+search engines also work with documents in similar way.
+Most of the documents that are handled by search engines are web pages.
+Many PDF readers can support highlighting and commenting.
+With these features, we can relate a document piece to a code piece.
+However, these links created are not stable,
+and PDF readers can not check the integrity of these information.
+
+Generally speaking, these are tools can either do code management or do document management.
+However, they are not designed to do both,
+and managing the relationships between codes and documents is definitely a mission impossible task for them.
+
+
+% Based on what you have so far, what can you conclude?  What cool ideas did you think up but not have time to implement so far?
+\section{Conclusions and Future Work}
+\label{sec:conclusion}
+We have implemented coDoc, 
+a tool for managing the relationships between the hardware related programs and their documentation.
+The main contribution of this paper is the method to identify the code segment.
+Our experiences of using coDoc to manage the code for two virtual devices and their documentation shows the tool is robust and efficent,
+and is helpful when developing and maitaining the virtual devices.
+The relationships remain stable even when the code changes.
+
+There are still opportunities to improve coDoc.
+\begin{enumerate}
+\item Combine it with revision control tools to provide a more user-friendly tool suit for developing and maitaining the codes while managing the documents at the same time.
+\item Design more robust method to identify the document pieces in the PDF documents to make the tool invariant to the change of the documents.
+\item Use machine learning (use the data created as seed to train the model) to construct and check the relationships between hardware related codes and their documents.
+\end{enumerate}
+
+
+
+% conference papers do not normally have an appendix
+
+
+% use section* for acknowledgement
+\section*{Acknowledgment}
+
+
+The authors would like to thank...
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+%\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+%\bibliography{IEEEabrv,../bib/paper}
+\bibliographystyle{IEEEtran}
+\bibliography{reference}
+
+% that's all folks
+\end{document}
+
+
