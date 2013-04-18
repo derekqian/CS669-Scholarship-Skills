@@ -15,10 +15,10 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{coDoc: A Tool for Managing Relationships between Code and Documentation}
+\title{Managing Traceability Links between Specifications and Implementations of Hardware/Software Interfaces}
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{coDoc: Managing Relationships between Code and Documentation}
+\titlerunning{Managing Traceability Links between Specifications and Implementations of Hardware/Software Interfaces}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -28,16 +28,16 @@
 %
 \author{Dejun Qian}
 %
-\authorrunning{coDoc: Managing Relationships between Code and Documentation}
+\authorrunning{Managing Traceability Links between Specifications and Implementations of Hardware/Software Interfaces}
 % (feature abused for this document to repeat the title also on left hand pages)
 
 % the affiliations are given next; don't give your e-mail address
 % unless you accept that it will be published
 \institute{Computer Science Department,\\
 Portland State University,\\
-1900 SW 4th Avenue Portland, OR 97201, USA\\
-\mailsa\\
-\url{http://www.pdx.edu/computer-science/}}
+1900 SW 4th Avenue Portland, OR 97201, USA}
+%\mailsa\\
+%\url{http://www.pdx.edu/computer-science/}}
 
 %
 % NB: a more complex sample for affiliations and the mapping to the
@@ -52,22 +52,22 @@ Portland State University,\\
 
 
 \begin{abstract}
-The reuse of either software or hardware components is an important way to build large systems.
-Documentation plays a critical role in the process of reusing,
-as it describes how the components can be reused.
-When writing and testing software, 
-we need the documentation in hand.
-This is particularly true for software that is documentation-intensive, 
-such as device drivers and virtual device modules.
-This paper presents coDoc, 
-an integrated development environment for managing relationships between code and documentation.
-We describe the architecture and features of coDoc,
-and discuss several design decisions that we faced in developing coDoc and the trade-offs involved in making these decisions.
-We report our experiences in mapping two virtual network interface card (NIC) modules to the real NIC documents by coDoc.
-\keywords{Software Engineering, Data Model}
+Traceability links between specifications and implementations play a crucial role in improving the quality of hardware/software (HW/SW) interfaces. 
+HW/SW interface specifications are typically stable while their hardware and software implementations are constantly evolving even after their releases. 
+Due to the low abstraction levels of HW/SW interfaces, 
+these specifications are often quite detailed, 
+thus demanding fine-grained traceability links. 
+In this paper, we present a framework for managing traceability links between specifications and implementations of HW/SW interfaces. 
+This framework supports fine-grained links between basic elements of specifications and semantic constructs of implementation languages. 
+It also supports automatic migration of links as implementations evolve. 
+We have implemented a prototype tool, namely coDoc, in support of this framework. 
+We have applied coDoc to ten versions of three virtual devices in the QEMU virtual machine.
+Experimental results show that our framework fully supports the types of traceability links between the virtual devices and their specifications,
+and it accurately migrates valid links from version to version.
+%\keywords{Software Engineering, Data Model}
 \end{abstract}
 
-
+%\newpage
 \section{Introduction}
 \label{sec:introduction}
 Documentation plays an important role in software engineering.
@@ -130,6 +130,14 @@ Section \ref{sec:arch} provides the overall architecture and key features of coD
 Section \ref{sec:evaluation} summarizes our experiences of creating and maitaining the relationships for two virtual devices.
 Section \ref{sec:related} presents the related work.
 Section \ref{sec:conclusion} concludes our work and gives our future research plan.
+
+introduction - give the problem (create and manage links)
+motivation and definition - example to illustrate the problem (further illustrate the problem)
+architechture and data model (a general framework to solve the problem) - key as a requirement
+handle some specific difficulties - our solution using ast tree
+evaluation - three vd with ten version
+related work
+conclusion
 
 \section{Architecture and Features of coDoc}
 \label{sec:arch}
