@@ -1,10 +1,8 @@
 all:
-	latex paper
+	pdflatex paper
 	bibtex paper
-	latex paper
-	latex paper
-	dvips paper
-	ps2pdf paper.ps
+	pdflatex paper
+	pdflatex paper
 
 clean:
 	rm -f paper.log
