@@ -1,15 +1,15 @@
 \begin{abstract}
-Traceability links between specifications and implementations of hardware/software (HW/SW) interfaces play a crucial role in improving the quality of computer systems.
-On one hand, HW/SW interfaces are often quite detailed, on low abstraction levels, 
-thus demanding fine-grained traceability links.
-On the other hand, HW/SW interface specifications are typically stable while their hardware and software implementations are constantly evolving even after their releases, which requires robust traceability links.
-In this paper, we present a framework for managing traceability links between specifications and implementations of HW/SW interfaces. 
+Traceability links between specification and implementation are crucial to improving the quality of hardware/software (HW/SW) interfaces.
+HW/SW interface implementation is often quite detailed and on low abstraction levels, thus demanding fine-grained traceability links.
+HW/SW interface specification is typically stable while its hardware and software implementations are constantly evolving even after 
+their releases, which requires robust traceability links.
+In this paper, we present a framework for managing traceability links between specification and implementation of HW/SW interfaces.
 This framework supports fine-grained traceability links between basic elements of specifications and constructs of implementation languages.
-It also supports automatic migration of links as implementations evolve. 
-We have implemented a prototype tool, namely coDoc, in support of this framework. 
-We have applied coDoc to ten versions of three virtual devices in the QEMU virtual machine.
+It supports automatic migration of links as implementation evolves.
+We have developed a prototype tool, namely coDoc, in support of this framework.
+We have applied coDoc to ten versions of three virtual devices from the QEMU virtual machine.
 Experimental results show that our framework fully supports the types of traceability links between the virtual devices and their specifications,
-and it accurately migrates valid links from version to version.
+and accurately migrates valid links from version to version.
 %\keywords{Software Engineering, Data Model}
 \end{abstract}
 

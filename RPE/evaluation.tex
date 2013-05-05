@@ -3,12 +3,12 @@
 
 \subsection{Experimental Setup}
 \todo{The data in the section are fake.}
-We evaluate our approach on four virtual device prototypes in QEMU. QEMU is a generic and open source machine emulator, which can host unmodified guest operating systems \cite{bellard_qemuwiki_2013} \cite{bellard_qemu_2005}. QEMU includes virtual implementations for a large number of hardware devices. We do our evaluation on four of them: MAX7310, RTL8139, EEPro100 and E1000. MAX7310 is a 8-bit I/O expander developed by Maxim. This device is used when a system need more I/O ports. EEPro100, E1000 and RTL8139 are three popular network adapters. Both EEPro100 and E1000 are developed by Intel, and RTL8139 is developed by Realtek. All these four devices have specifications in PDF (Portable Document Format) format. We examined the release history of the virtual implementations and specifications of these four hardware device, and found that almost no change has been made to specifications after the corresponding implementations have begun to release.
+We evaluate our approach on four virtual device prototypes in QEMU. QEMU is a generic and open source machine emulator, which can host unmodified guest operating systems \cite{bellard_qemuwiki_2013} \cite{bellard_qemu_2005}. QEMU includes virtual implementations for a large number of hardware devices. We do our evaluation on four of them: MAX7310, RTL8139, EEPro100 and E1000. MAX7310 is a 8-bit I/O expander developed by Maxim. This device is used when a system needs additional I/O ports. EEPro100, E1000 and RTL8139 are three popular network adapters. Both EEPro100 and E1000 are developed by Intel, and RTL8139 is developed by Realtek. All these four devices have specifications in PDF (Portable Document Format) format. We examined the release history of the virtual implementations and specifications of these four hardware device, and found that almost no change has been made to specifications after the corresponding implementations were released.
 
-Based on the QEMU repository, the virtual device prototypes for MAX7310, RTL8139, EEPro100 and E1000 have 22, 143, 163 and 168 versions since they are first created. We check out ten stable versions of all these virtual device drivers from the repository. 
-The ten versions we used are stable-0.10, stable-0.11, stable-0.12, stable-0.13, stable-0.14, stable-0.15, stable-1.0, stable-1.1, stable-1.2 and stable-1.3, we represent them as 1 - 10 repectively.
+Based on the QEMU repository, the virtual device prototypes for MAX7310, RTL8139, EEPro100 and E1000 have 22, 143, 163 and 168 versions since they are first created. We check out ten stable versions of all these virtual device drivers from the repository.
+The ten versions we used are stable-0.10, stable-0.11, stable-0.12, stable-0.13, stable-0.14, stable-0.15, stable-1.0, stable-1.1, stable-1.2 and stable-1.3. We represent them as 1 - 10 respectively.
 We present the average lines of code (LOC) and the average number of functions of the virtual device prototypes, as well as the number of pages of the specifications in Table \ref{table:vdd}.
-The LOC metrics are measured by the tool named locmetrics.
+The LOC metrics are measured by a tool named locmetrics.
 The lines of code (LOC) range from 181 to 2771. The sizes of specification range from 15 pages to 410 pages.
 
 The changes from version to version for all the four virtual device prototypes are shown in Table \ref{table:version}. The changes are measured by the lines of code different from version to version using an open source tool cloc.
@@ -71,10 +71,10 @@ E1000  & 91\%\\
 % granularity
 \subsection{Granularity}
 
-The identifying method with fine granularity makes the relationship created by coDoc very accurate, 
+The identifying method with fine granularity makes the relationship created by coDoc very accurate,
 80\% of the code pieces are marked inside the statement and expressions.
 The same result happens for the document.
-In the whole relationships, 
+In the whole relationships,
 90\% of the document pieces are marked on cells in the tables.
 The granulariy results are listed in Table \ref{table:granularity}.
 
@@ -94,7 +94,7 @@ E1000  & 213 & 4 & 5\\
 \label{table:granularity}
 \end{table}
 
-%In our own experience, we found that the ability to see the code, 
+%In our own experience, we found that the ability to see the code,
 %the documentation and the relationships on the same screen saves a lot of time,
 %as we don't need to switch between different tools.
 

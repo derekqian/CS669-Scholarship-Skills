@@ -1,40 +1,37 @@
-% maintenace is important, takes time. 
+% maintenace is important, takes time.
 % reason: code size, spec size, relationship
 
-% the lowest level HW/SW interface primitive is found in the form of SW programmable registers. 
+% the lowest level HW/SW interface primitive is found in the form of SW programmable registers.
 % There are other vital aspects of the HW/SW interface, such as interrupts but these are not covered within the scope of this paper.
 % the software interface of an IP block as an address-mapped bus (from processor) being mapped into registers that provide the configuration, control and status interface of the hardware logic.
 \section{Introduction}
 \label{sec:introduction}
 
-The majority of software engineering work is devoted to maintaining legacy software systems other than developing new ones \cite{abran_maintenance_1991}.
-It is estimated that up to 60\% of software maintenance time is spent on program comprehension \cite{lawrence_software_2006}.
+Significant portion of software engineering efforts is devoted to maintaining legacy software systems~\cite{abran_maintenance_1991}.
+It is estimated that up to 60\% of software maintenance efforts is spent on program comprehension~\cite{lawrence_software_2006}.
 Software developers often find it difficult to extract the knowledge about a software system,
-because the knowledge is often implicitly expressed,
-and distributed in a variety of software artifacts.
+because such knowledge is often implicitly expressed and distributed in a variety of software artifacts.
 Examples of software artifacts include source code, design documents, application programming interface specifications, bug reports, etc.
 
-To make the knowledge about a software system explicit,
-reserachers have built various techniques to recover the semantic connections among software artifacts,
+To capture such knowledge explicitly, various techniques have been developed to recover the semantic connections among software artifacts,
 especially between documentation and source code \cite{antoniol_recoveringtraceability_2002} \cite{deLucia_incremental_2006} \cite{marcus_recovering_2003}.
-These semantic connections are often called \textit{traceability links}. 
-Effectively maintaining the traceability links can help improving the productivity of the developer and the quality of the software \cite{neumuller_case_2006}.
+Such semantic connections are often called \textit{traceability links}.
+Effectively maintaining the traceability links helps improving developer productivity and software quality \cite{neumuller_case_2006}.
 
-Unfortunately, these techniques are not ready to be applied to implementations and specifications of HW/SW interfaces,
-even though these implementations are an important category of software that caused most of the system failures in both Windows and Linux operating systems \cite{swift_os_2003} \cite{chou_os_2001},
-HW/SW interface forms the interaction point of hardware and software,
-and defines the protocol for the hardware and software to communicate.
-The implementation of HW/SW interfaces refers to hardware design, device drivers and virtual device prototypes, who implement the communication logic on both sides of the interfaces.
+Unfortunately, these techniques are not readily applicable to specification and implementation of hardware/software (HW/SW) interfaces,
+even though such implementation causes most system failures in both Windows and Linux operating systems \cite{swift_os_2003} \cite{chou_os_2001},
+HW/SW interface inter-connects hardware and software and defines the protocol for hardware and software to communicate.
+The implementation of HW/SW interfaces typically include hardware designs and device drivers. There is also software implementation of hardware design, e.g., virtual devices in virtual machines such as QEMU~\cite{Bellard05}
+%and virtual device prototypes, who implement the communication logic on both sides of the interfaces.
 %The implements are designed for a variety of computer components, and form a large part of operating systems and virtual machines.
-HW/SW interface specifications describe the HW/SW interfaces in natuaral lagnguage,
-and guide the implementation of the interfaces.
-HW/SW interface specifications play a crucial role in the comprehension and maintenance of the implementations of the interfaces.
-The reason why existing traceability link recovering techniques do not work for HW/SW interfaces is that these traceability links need to be fine-grained,
-which is not supported by the existing techniques.
-HW/SW interfaces are mainly composed of software-programmable hardware registers mapped to the processor's address space.
-The low-level abstraction of the software/hardware interface makes the traceability links fine-grained.
-Traceability links between the specifications and implementations usually connect statements, which operate the registers, or expressions, which represent certain bits of registers, to the register bit descriptions in the specifications. 
-However, previous tools usually maintain tracebility links between the classes or functions of the source code and sections or paragraphes of the documentation, which is more coarse-grained.
+
+A HW/SW interface specification describes a HW/SW interface in natural language and guides its implementation.
+The specification plays a crucial role in the comprehension and maintenance of the implementation.
+The key reason why existing traceability link recovering techniques do not work for HW/SW interfaces is that these traceability links need to be fine-grained,
+which are not supported by the existing techniques.
+HW/SW interfaces are mainly composed of software-programmable hardware registers mapped to the processor address space.
+The low-level abstraction of the HW/SW interface demands the fine-grained traceability links.
+These traceability links need to connect statements which operate the registers or expressions which represent certain bits of registers to the register bit descriptions in the specification. However, previous techniques maintain traceability links between classes or functions of the source code and sections or paragraphes of the specification, which is to coarse-grained.
 
 % Second, the evolution nature of software artifacts makes the situation even worse.
 % No matter how the traceability links are created -- automatically or manually, these links are probably only valid for a certain version of the software.
@@ -52,30 +49,29 @@ However, previous tools usually maintain tracebility links between the classes o
 % The semantic information is often encoded into binary numbers, and presented in tables.
 % These modules and registers do not relate to the code in an explicit way.
 
-We present a framework for managing traceability links between specifications and implementations of HW/SW interfaces. 
+We present a framework for managing traceability links between specification and implementation of HW/SW interfaces.
 This framework supports fine-grained links between basic elements of specifications and constructs of implementation languages.
-We design a data model to support the framework, and organize the data for the traceability links.
-Our framework also supports automatic migration of links as implementations evolve. 
+A simple, but effective data model is developed to support the framework and organize the data of the traceability links.
+Our framework also supports automatic migration of valid traceability links as implementation evolves.
 
-We have implemented a prototype tool, namely coDoc, in support of this framework. 
-With this tool, the developer can import and manage implementation source code and interface specifications, select a certain piece of implementation (POI) and a certain piece of specification (POS) of interest, create a traceability link connecting the seleted POI and POS, check out a different version of source code, review and verify the existing traceability links. 
-We applied coDoc to three virtual device prototypes and their specifications, recovered traceability links, and verified the traceability links on other versions of the driver code.
+We have implemented a prototype tool, namely coDoc, in support of this framework.
+With coDoc, developers can (1) import and manage implementation source code and interface specifications, (2) select a piece of implementation (POI) and a piece of specification (POS) of interest, (3) create a traceability link connecting the selected POI and POS, (4) check out a different version of source code, and (5) migrate, review, and verify existing traceability links. We applied coDoc to source code of three virtual devices from QEMU and their specifications, recovered traceability links, and migrated these links to newer versions of source code .
 Experimental results show that our framework fully supports the types of traceability links between the virtual devices and their specifications,
-maintain traceability links with required granularity, 
-and it accurately migrates valid links from version to version.
-\todo{the data need to be updated}\hlc{It preserves 70\% of the existing traceability links when code evolves to a new version.}
+maintain traceability links with required granularity, and accurately migrates valid links from version to version.
+\todo{the data need to be updated}\hlc{It preserves 70\% of valid traceability links when source code evolves to a new version.}
 
 This paper makes the following key contributions:
 \begin{itemize}
-\item Presented a framework for managing traceability links between specifications and implementations of HW/SW interfaces with accuracy, robustness and fine-granularity.
-\item Developed coDoc, a tool implementing the approach.
-\item Evaluated our approach with realistic examples.
+\item Presented a framework for managing traceability links between specification and implementation of HW/SW interfaces;  
+\item Developed a simple, but effective data model for capturing and recording links; 
+\item Identified appropriate anchors in implementation and specification that support fine-granularity and migration of valid links as implementation evolves; 
+\item Developed coDoc, a prototype tool implementing the approach and evaluated our approach on realistic examples.
 \end{itemize}
 
-The rest of the paper is organized as follows. 
-Section \ref{sec:problem} examplifies and defines the problem that we address in this paper.
-Section \ref{sec:approach} and section \ref{sec:implementation} illustrate the design and implementation details of our approach.
-Section \ref{sec:evaluation} provides some preliminary evaluation results.
-Section \ref{sec:related} reviews the related work.
-We conclude our approach and discuss the future work in Section \ref{sec:conclusion}.
+The rest of the paper is organized as follows.
+Section \ref{sec:problem} elaborates on the problem addressed in this paper.
+Section \ref{sec:approach} and Section \ref{sec:implementation} illustrate the design and implementation details of our approach.
+Section \ref{sec:evaluation} provides preliminary evaluation results.
+Section \ref{sec:related} reviews related work.
+We conclude this paper and discuss future work in Section \ref{sec:conclusion}.
 

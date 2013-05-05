@@ -1,24 +1,25 @@
 \section{Related Work}
 \label{sec:related}
-Researchers have done much work to build automatic tools for traceability link recovery (TLR) from software systems \cite{antoniol_recoveringtraceability_2002} \cite{deLucia_incremental_2006} \cite{marcus_recovering_2003}.
+There has been much research on building automatic tools for traceability link recovery (TLR) from software artifacts \cite{antoniol_recoveringtraceability_2002} \cite{deLucia_incremental_2006} \cite{marcus_recovering_2003}.
 TLR technology scans the software artifacts including source code and documentation and recovers the semantic connections by information retrieval (IR) methods.
-\todo{improve}This technology has shown to be advanced and successful \cite{spanoudakis_software_2004}.
-However, IR techniques are not good enough to substitute the human decision-maker in the linking process.
-Hayes et al. suggests these IR techniques should only be used to generate an appropriate list of candidate links evaluated by software analyst \cite{hayes_advancing_2006}.
-The recall of these techniques is not as good as to be pratical, a significant part of traceability links need to be recovered manually.
-Trace acquisition remains human-intensive and with high initial cost as reported in case studies on industrial processes and traceability experiences \cite{lindvall_practical_1996} \cite{ramesh_implementing_1995} \cite{asuncion_an_2007} \cite{gotel_extended_1997} \cite{neumuller_case_2006}.
+%\todo{improve}This technology has shown to be advanced and successful \cite{spanoudakis_software_2004}.
+However, IR techniques cannot completely substitute the human decision-maker in the linking process.
+Hayes et al. suggests such IR techniques should only be used to generate an appropriate list of candidate links which are then evaluated by software analysts \cite{hayes_advancing_2006}.
+For this reason, these automatic techniques have not been widely adopted and most traceability links still need to be recovered manually.
+Link acquisition remains human-intensive and with high initial cost as reported in case studies on industrial processes and traceability experiences \cite{lindvall_practical_1996} \cite{ramesh_implementing_1995} \cite{asuncion_an_2007} \cite{gotel_extended_1997} \cite{neumuller_case_2006}.
 
 The evolution nature of software artifacts makes the situation even worse.
 No matter how the traceability links are created -- automatically or manually,
 these links are probably only valid for a certain version of the software.
-As software evolves during the development and maintenance process, software artifacts changes as well.
+As software evolves during the development and maintenance process, software artifacts changes constantly.
 These changes might invalidate the existing traceability links.
-For automatically recovered links, we can re-run the TLR tool to reestablish them.
-However, this solution is computationally costly for interactive use during software development stage.
 For manually recovered links, we must reestablish these links manually again, which is arduous.
-This intimidate people from using TLR tools in their daily work.
-Some work has been done to address this problem by improving exisiting IR based methods \cite{jiang_incremental_2008}.
-However, these work didn't consider the situations specific to hardware related software.
+For automatically recovered links, we can re-run the TLR tool to reestablish them.
+However, this solution is computationally costly for interactive use during the software development stage.
+This intimidates people from using TLR tools in their daily work.
+There has been research addressing this problem by improving existing IR based methods \cite{jiang_incremental_2008}.
+Our approach differs in that we try to migrate valid links instead of re-establishing these links.
+%However, these work didn't consider the situations specific to hardware related software.
 
 %An intuitive thought is to use the semantic information,
 %that is the intrinsic meaning of the code.
