@@ -1,26 +1,28 @@
+% the granularity of valid links:
+% 0 135 100
+% the number of valid links:
+% 233 232 195 188 188 170 170 169 169 169
+
 \section{Evaluation}
 \label{sec:evaluation}
 
+In this section, we evaluate our approach with four real world implementations and their specifications. With coDoc, we first manually create the traceability links between these implementations and specifications. We then analyze these traceability links and show how they meet the three requirements we propose in previous sections.
+
 \subsection{Experimental Setup}
-\todo{The data in the section are fake.}
-We evaluate our approach on four virtual device prototypes in QEMU. QEMU is a generic and open source machine emulator, which can host unmodified guest operating systems \cite{bellard_qemuwiki_2013} \cite{bellard_qemu_2005}. QEMU includes virtual implementations for a large number of hardware devices. We do our evaluation on four of them: MAX7310, RTL8139, EEPro100 and E1000. MAX7310 is a 8-bit I/O expander developed by Maxim. This device is used when a system needs additional I/O ports. EEPro100, E1000 and RTL8139 are three popular network adapters. Both EEPro100 and E1000 are developed by Intel, and RTL8139 is developed by Realtek. All these four devices have specifications in PDF (Portable Document Format) format. We examined the release history of the virtual implementations and specifications of these four hardware device, and found that almost no change has been made to specifications after the corresponding implementations were released.
+We evaluate our approach on four virtual devices in QEMU. Virtual devices form a category of implementations of HW/SW interfaces. They emulate the hardware devices for virtual machines, and conform to the same specifications as the real hardware devices. QEMU is a generic and open source machine emulator, which can host unmodified guest operating systems \cite{bellard_qemuwiki_2013} \cite{bellard_qemu_2005}. QEMU includes virtual devices for a large number of hardware devices. We do our evaluation on four of them: MAX7310, RTL8139, EEPro100 and E1000. MAX7310 is a 8-bit I/O expander developed by Maxim. This device is used when a system needs additional I/O ports. EEPro100, E1000 and RTL8139 are three popular network adapters. Both EEPro100 and E1000 are developed by Intel, and RTL8139 is developed by Realtek. The specifications of all these four devices are in PDF (Portable Document Format) format.
 
-Based on the QEMU repository, the virtual device prototypes for MAX7310, RTL8139, EEPro100 and E1000 have 22, 143, 163 and 168 versions since they are first created. We check out ten stable versions of all these virtual device drivers from the repository.
-The ten versions we used are stable-0.10, stable-0.11, stable-0.12, stable-0.13, stable-0.14, stable-0.15, stable-1.0, stable-1.1, stable-1.2 and stable-1.3. We represent them as 1 - 10 respectively.
-We present the average lines of code (LOC) and the average number of functions of the virtual device prototypes, as well as the number of pages of the specifications in Table \ref{table:vdd}.
-The LOC metrics are measured by a tool named locmetrics.
-The lines of code (LOC) range from 181 to 2771. The sizes of specification range from 15 pages to 410 pages.
+The release history of these four virtual devices and their specifications shows that almost no change has been made to specifications after the virtual devices were first released. The virtual devices for MAX7310, RTL8139, EEPro100 and E1000 have 22, 143, 163 and 168 versions respectively since their first release. QEMU published ten stable versions: stable-0.10, stable-0.11, stable-0.12, stable-0.13, stable-0.14, stable-0.15, stable-1.0, stable-1.1, stable-1.2 and stable-1.3. We will going to illustrate our evaluation results on these then versions. In the rest of the paper, we refer to these ten versions as 1 - 10 respectively.
 
-The changes from version to version for all the four virtual device prototypes are shown in Table \ref{table:version}. The changes are measured by the lines of code different from version to version using an open source tool cloc.
+Table \ref{table:vdd} shows the size of these four virtual devices and their specifications. We use the lines of code (LOC) and number of functions to measure the size of the virtual devices, and the number of pages to measure the size of the specifications. As shown in the table, the LOCs of the virtual devices range from 181 to 2771, and the number of functions range from 9 to 101. The sizes of the specifications range from 15 to 410 pages.
 
 \begin{table}[th]
-\caption{Three Virtual Device Drivers Used for Evaluation}
+\caption{Four Virtual Devices and Their Specifications Used for Evaluation}
 \centering
 \begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}}rccc}
 \hline
- & \multicolumn{2}{c}{implementation} & specification \\
-\cline{2-4}
- & LOC & Functions & pages \\
+ & \multicolumn{2}{c}{Virtual Devices} & Specifications \\
+\cline{2-3} \cline{4-4}
+ & LOC & Functions & Pages \\
 \hline
 MAX7310 & 181 & 9 & 15\\
 RTL8139  & 2771 & 101 & 67\\
@@ -32,8 +34,44 @@ E1000  & 1905 & 52 & 410\\
 \end{table}
 
 
+\subsection{Evaluation Results for Our Approach}
+The results show how our approach meets the three requirements respectively. We manually create the traceability links between the four virtual devices of version VER1 and their specification. We then analyze the traceability links and compute the correspondence and granularity. The created traceability links are also checked with the other versions of virtual devices, and show the orthogonality of our approach.
+
+% accuracy
+\subsubsection{The Correspondence of Our Approach}
+We measure the correspondence by the percentage of the number of traceability links that can uniquely identify a certain POI and a certain POS over the number of all the traceability links created. We go through each traceability link, and check if the traceability links can identify a different POI and POS. If not, we count this traceability links as the one with correspondence. We do the experiments on all created traceability links for the four virtual devices and their specifications. The results show that our approach can grantee that the traceability links conform to the requirement of correspondence.
+
+% granularity
+\subsubsection{The Granularity of Our Approach}
+To measure the granularity of the traceability links created by our approach, we count the traceability links that connect to functions, statements and expressions respectively. We check each traceability link. If it connects to a POI including a function declarator, we count it as a function level traceability. If a traceability link is not at function level, we check if the POI includes semicolon. If so, we classify it as statement level traceability link, otherwise, we classify it as expression level traceability link. The results are listed in Table \ref{table:granularity}. From the results, we can see most of the traceability links connect to statements and expressions, and our approach can handle this situation very well. The same result happens for the specifications. All the traceability links connect to the POSes smaller than a paragraph, and most of them connect to the cells in the tables describing registers.
+
 \begin{table}[th]
-\caption{The Changes in Ten Versions}
+\caption{The Granularity Result of Our Approach}
+\centering
+\begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}}rccc}
+\hline
+ & \# functions & statements & expressions \\
+\hline
+MAX7310 & 0 & 3 & 18\\
+RTL8139  & 0 & 135 & 100\\
+EEPro100  & 5 & 81 & 127\\
+E1000  & 2 & 102 & 127\\
+\hline
+\end{tabular*}
+\label{table:granularity}
+\end{table}
+
+%In our own experience, we found that the ability to see the code,
+%the documentation and the relationships on the same screen saves a lot of time,
+%as we don't need to switch between different tools.
+
+\subsubsection{The Orthogonality of Our Approach}
+
+To evaluate the orthogonality of our approach, we apply the traceability links created on the virtual devices of version 1 to the other versions. We count the number of traceability links that are still valid when the virtual devices evolve to another version.
+Table \ref{table:version} shows the changes of all the four virtual devices from version to version. The changes are measured by the lines of code using an open source tool cloc. From the table, we can see that some virtual device do not change for some versions. For example, the virtual device MAX7310 did not change when the version moves from 3 to 4. We also can see some virtual device change dramatically for some version. For example, the virtual device EEPro100 has 1870 lines of code, and has 903 lines of code change from version 3 to 4.
+
+\begin{table}[th]
+\caption{The Differences Between The Virtual Device Versions}
 \centering
 \begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}rccccccccc}
 \hline
@@ -48,100 +86,27 @@ E1000 & 64 & 199 & 39 & 42 & 80 & 120 & 198 & 25 & 27\\
 \label{table:version}
 \end{table}
 
-% accuracy
-\subsection{Accuracy}
-We measure the accurary by the number of uniquely identifiable POC over number of traceability links recovered for all the virtual prototypes. The result is shown in Table \ref{table:accuracy}
-
-\begin{table}[th]
-\caption{Accuracy}
-\centering
-\begin{tabular*}{0.3\textwidth}{@{\extracolsep{\fill}}rc}
-\hline
- & accuracy \\
-\hline
-MAX7310 & 80\%\\
-RTL8139  & 87\%\\
-EEPro100  & 78\%\\
-E1000  & 91\%\\
-\hline
-\end{tabular*}
-\label{table:accuracy}
-\end{table}
-
-% granularity
-\subsection{Granularity}
-
-The identifying method with fine granularity makes the relationship created by coDoc very accurate,
-80\% of the code pieces are marked inside the statement and expressions.
-The same result happens for the document.
-In the whole relationships,
-90\% of the document pieces are marked on cells in the tables.
-The granulariy results are listed in Table \ref{table:granularity}.
-
-\begin{table}[th]
-\caption{Granularity Result}
-\centering
-\begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}}rccc}
-\hline
- & \# functions & statements & expressions \\
-\hline
-MAX7310 & 108 & 2 & 3\\
-RTL8139  & 213 & 4 & 5\\
-EEPro100  & 213 & 4 & 5\\
-E1000  & 213 & 4 & 5\\
-\hline
-\end{tabular*}
-\label{table:granularity}
-\end{table}
-
-%In our own experience, we found that the ability to see the code,
-%the documentation and the relationships on the same screen saves a lot of time,
-%as we don't need to switch between different tools.
-
-\subsection{Adapting to Evolving Code}
-
-To evaluate how our approach adapt to evolving code, we recover the traceability links for the first version of all the four virtual device driver code.
-We then check the number of valid traceability links left in the later versions. The result is shown in table \ref{table:robust}.
+The number of valid traceability links remaining valid at each version is shown in table \ref{table:robust}. As expected, the number of valid traceability links falls while the versions move away. However, more than half of the traceability links still remain valid even after ten stable versions of code change. We can also see from the table that the more the code changes, the less the traceability links remain valid.
 % traceability link lifetiem (versions)
 
 \begin{table}[th]
-\caption{Robustness}
+\caption{The Orthogonality Result of Our Approach}
 \centering
-\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}rccccccccc}
+\begin{tabular*}{0.9\textwidth}{@{\extracolsep{\fill}}rcccccccccc}
 \hline
- & 1-2 & 2-3 & 3-4 & 4-5 & 5-6 & 6-7 & 7-8 & 8-9 & 9-10 \\
+ & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 \\
 \hline
-MAX7310 & 108 & 2 & 10 & 108 & 2 & 10 & 108 & 2 & 10\\
-RTL8139  & 213 & 4 & 210 & 108 & 2 & 10 & 108 & 2 & 10\\
-EEPro100  & 213 & 4 & 20 & 108 & 2 & 10 & 108 & 2 & 10\\
-E1000  & 213 & 4 & 290 & 108 & 2 & 10 & 108 & 2 & 10\\
+MAX7310 & 21 & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 12 & 12\\
+RTL8139  & 233 & 232 & 195 & 188 & 188 & 170 & 170 & 169 & 169 & 169\\
+EEPro100  & 233 & 232 & 195 & 188 & 188 & 170 & 170 & 169 & 169 & 169\\
+E1000  & 233 & 232 & 195 & 188 & 188 & 170 & 170 & 169 & 169 & 169\\
 \hline
 \end{tabular*}
 \label{table:robust}
 \end{table}
 
-\subsection{Performance}
+\subsubsection{Summary}
+Our approach can meet the three requirements for the traceability links between virtual devices and specifications.
+The traceability links created using our approach are fine grained and robust. They can connect to statement and expression level POIs, as well as sentence and word level POSes. More than half of them remain valid after the code evolves for ten stable versions.
 
-We test the performance of our algorithm to complete code selection and to verify traceability links. The result is shown in table \ref{table:performance}.
-
-\begin{table}[th]
-\caption{Performance}
-\centering
-\begin{tabular*}{0.6\textwidth}{@{\extracolsep{\fill}}rccc}
-\hline
- & verification & completion\\
-\hline
-MAX7310 & 108 & 2 \\
-RTL8139  & 213 & 4\\
-EEPro100  & 213 & 4\\
-E1000  & 213 & 4\\
-\hline
-\end{tabular*}
-\label{table:performance}
-\end{table}
-
-
-\subsection{Summary}
-
-In summary, our approach can meet the three requirements for the traceability links between device drivers and device specifications.
-We believe this tool will lead to increased productivity.
+% LocalWords:  coDoc rccc RTL cloc rccccccccc EEPro
